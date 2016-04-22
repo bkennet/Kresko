@@ -1,1 +1,36 @@
 /******* Place CSS Below ********/
+
+.page-wrapper {
+	height: 100vh;	
+}
+
+.header {
+	height: 20%;
+	width: 100%;
+	border: 2px solid black;
+}
+
+.sign-in {
+	height: 15%;
+	border: 2px solid black;
+}
+
+.title {
+	border: 2px solid purple;
+	height: 65%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	height: 80vh;
+	border: 2px solid gold;
+	width: 100%;
+}
+
+.navigation {
+	height: 20%;
+	width: 100%;
+	border: 2px solid black;
+}
