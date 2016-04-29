@@ -1,4 +1,8 @@
 /******* Place CSS Below ********/
+* {
+	padding: 0;
+	margin: 0;
+}
 
 .page-wrapper {
 	height: 100vh;	
@@ -33,4 +37,37 @@
 	height: 20%;
 	width: 100%;
 	border: 2px solid black;
+}
+
+/* For log in page */
+
+.log-in-content {
+	height: 80vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.log-in-box {
+	height: 25%;
+	width: 30%;
+	border: 2px dashed black;
+	border-radius: 7%;
+}
+
+.log-in-box-header {
+	text-align: center; 
+	height: 20%; 
+	width: 100%
+}
+
+.log-in-box-content {
+	height: 80%;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.log-in-button {
+	margin: 0 40% 0 40%;
 }

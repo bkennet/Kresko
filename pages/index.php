@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kresko: Artisinal Crafts and Products</title>
-    <link rel='stylesheet' type='text/css' href='./css/main.css'>
-    <link rel='stylesheet' type='text/css' href='./css/bootstrap.css'>
-    <!-- <link rel='stylesheet' type='text/css' href='./css/bootstrap-theme.css'> -->
+    <?php include "../includes/header.php"; ?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
       <div class="row header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
         <div class="sign-in">
-          Sign-in/Sign-out
+          <a href="./log-in.php"> Sign-in/Sign-out </a>
         </div>
 
         <div class="title">
