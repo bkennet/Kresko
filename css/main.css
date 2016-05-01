@@ -41,7 +41,7 @@
 
 /* For log in page */
 
-/*.log-in-content {
+.log-in-content {
 	height: 80vh;
 	width: 100%;
 	display: flex;
@@ -70,7 +70,7 @@
 
 .log-in-button {
 	margin: 0 40% 0 40%;
-}*/
+}
 
 /******* Place CSS Below ********/
 @font-face {
