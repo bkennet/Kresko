@@ -6,9 +6,10 @@
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
+      <img id='homepicture' src="../images/misc/background.jpg" alt='hi'>
+     
       <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
 
-        <img id='homepicture' src="../images/misc/background.jpg" alt='hi'>
 
         <div class="login">
           <a href ="./log-in.php">LOGIN</a>

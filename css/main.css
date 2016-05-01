@@ -41,7 +41,7 @@
 
 /* For log in page */
 
-.log-in-content {
+/*.log-in-content {
 	height: 80vh;
 	width: 100%;
 	display: flex;
@@ -70,7 +70,7 @@
 
 .log-in-button {
 	margin: 0 40% 0 40%;
-}
+}*/
 
 /******* Place CSS Below ********/
 @font-face {
@@ -155,16 +155,17 @@ p #brand {
 #homepicture {
 	position: absolute;
 	width: 100%;
-/*	margin-left: -15px;*/
 	overflow: hidden;
 	height: 500px;
 }
 
-.content { /* Here Content!!! */
+.content {
 	margin-top: 375px;
 	margin-bottom: 50px;
 	margin-right: 15px;
 	height: 820px;
+	width: 100%;
+	padding-bottom: 40px;
 	padding-left: 115px;
 	padding-right: 115px;
 	position: inline;
@@ -178,6 +179,7 @@ p #brand {
 	text-decoration: none;
 	color:white;
 }
+
 
 #row1 {
 	border-style: solid;
@@ -236,8 +238,6 @@ p #brand {
 	background-color: white;
 	height: 300px;
 }
-
-
 
 
 
