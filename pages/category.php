@@ -8,10 +8,23 @@
 
       <?php include "../includes/navigation.php"; ?>
 
+        <?php 
+          /* 
+          Category page pseudo-code: 
+          $mysql = connection(db, host, username, password);
+          
+          $query;
+          "query is generated based on the categoryID parameter set that will be set in the url"
 
+          $result = $mysqli->fetch(query);
+          $rows = $result->fetch_assoc();
+
+
+          */
+        ?>
         <div id="sort">
 
-          <h1>Category Name</h1>
+          <h1>Category/Vendor Name</h1>
           <h3>Sort by:
             <select name="quantity">
               <option value="relevance">Relevance</option>
@@ -21,9 +34,22 @@
               <option value="recent">Most Recent</option>
             </select>
           </h3>
+
         </div>
 
       <div class="gallery">
+
+        <?php
+          /*
+            for(rows as row) {
+              print(
+                
+                [INSERT HTML FOR EACH ITEM FETCHED FROM DB]
+
+              )
+            }  
+          */
+         ?>
        
         <a href="items.php?id=">
           <div>
