@@ -1,5 +1,4 @@
-
-     
+<?php session_start(); ?> 
 <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
 
 
@@ -11,7 +10,36 @@
   <div class="title">
       <a id="brand" href="index.php">KRESKO</a>
   </div>
-
+  <?php
+    //unset($_SESSION['usertype']);
+    $_SESSION['usertype']=1;
+    if ($_SESSION['usertype']==2) {
+  ?>
+  <div class="navigation">
+    <div class="col-md-4">
+      <a href ="profile.php">PROFILE</a>
+    </div>
+    <div class="col-md-4">
+      <a href ="../pages/items.php">ITEMS</a>
+    </div>
+    <div class="col-md-4">
+      <a href ="../pages/orders.php">ORDERS</a>
+    </div>
+  </div>
+  <?php 
+    } else if ($_SESSION['usertype']==1) {
+  ?>
+  <div class="navigation">
+    <div class="col-md-6">
+      <a href ="artisans.php">ARTISANS</a>
+    </div>
+    <div class="col-md-6">
+      <a href ="../pages/orders.php">ORDERS</a>
+    </div>
+  </div>
+  <?php 
+    } else {
+  ?>
   <div class="navigation">
     <div class="col-md-4">
       <a href ="artisans.php">ARTISANS</a>
@@ -34,4 +62,7 @@
         </div>
     </div>
   </div>
+  <?php 
+    }
+  ?>
 </div> <!-- end div header -->
