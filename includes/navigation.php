@@ -1,5 +1,3 @@
-
-     
 <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
   <div class="login">
     <a href ="./log-in.php">LOGIN</a>
