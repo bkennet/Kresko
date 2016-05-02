@@ -8,7 +8,20 @@
 
       <?php include "../includes/navigation.php"; ?>
 
+        <?php 
+          /* 
+          Category page pseudo-code: 
+          $mysql = connection(db, host, username, password);
+          
+          $query;
+          "query is generated based on the categoryID parameter set that will be set in the url"
 
+          $result = $mysqli->fetch(query);
+          $rows = $result->fetch_assoc();
+
+
+          */
+        ?>
         <div id="sort">
 
           <h1>Category Name</h1>
@@ -21,9 +34,27 @@
               <option value="recent">Most Recent</option>
             </select>
           </h3>
+          <?php
+          /*
+            Ajax will be used to update the gallery below based on how the user wants to 
+            sort each of the items in a particular category.
+          */
+          ?>
         </div>
 
       <div class="gallery">
+
+        <?php
+          /*
+            for(rows as row) {
+              print(
+                
+                [INSERT HTML FOR EACH ITEM FETCHED FROM DB]
+
+              )
+            }  
+          */
+         ?>
        
         <a href="items.php?id=">
           <div>
