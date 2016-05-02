@@ -6,75 +6,174 @@
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
+		<img id='homepicture' src="../images/misc/background.jpg" alt='hi'>
+     
+		<div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
 
-      <div class="row header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
-        <div class="sign-in">
-          <a href='./login.php'> Sign-in/Sign-out</a> 
-        </div>
+		  <div class="login">
+			<a href ="./log-in.php">LOGIN</a>
+			<a href = "cart.php">BAG</a>
+		  </div>
 
-        <div class="title">
-          <p>Kresko</p>
-        </div>
+		  <div class="title">
+			  <a id="brand" href ="index.php">KRESKO</a>
+		  </div>
 
-        <div class="navigation">
-          <div class="col-md-3">
-            Vendors
-          </div>
-          <div class="col-md-3">
-            Items
-          </div>
-          <div class="col-md-3">
-            Other
-          </div>
-          <div class="col-md-3">
-            Misc
-          </div>
-        </div>
-      </div> <!-- end div header -->
+		  <div class="navigation">
+			<div class="col-md-4">
+			  <a href ="artisans.php">ARTISANS</a>
+			</div>
+			<div class="col-md-4">
+			  <a href ="clothing.php">CLOTHING</a>
+			</div>
+			<div class="col-md-4">
+			  <a href ="accessories.php">ACCESSORIES</a>
+			</div>
+		  </div>
+      <div class="other-content">
+			<?php 
+				//Get username, password variables from POST, sanitize
+				$post_username = filter_input( INPUT_POST, 'username', FILTER_SANITIZE_STRING );
+				$post_password = filter_input( INPUT_POST, 'password', FILTER_SANITIZE_STRING );
+				//echo "$post_username<br>";
+				//echo "$post_password<br>";
+				
+				//check for incomplete variables and logout request
+				//if username, password not submitted via post, check for logout request
+				if ( empty( $post_username ) || empty( $post_password ) ) {
+					$logout = filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING);
+					if (!empty($logout) && (bool) $logout){
+						session_destroy();
+						$prev = filter_input( INPUT_GET, 'prev', FILTER_SANITIZE_STRING );
+							if (empty($prev)){
+								$prev = "index.php";
+							}
+							print "<div class='log-in-box-header'><span class='success'><p>Success! You've been logged out!</p></span>";
+							print "<p>Go back to <a href='{$prev}'>your last page</a></p></div>";
+					
+					?>
+					<!-- Needs js enabled! -->
+					<script type="text/javascript">
+					<!--
+					window.setTimeout(function() {
+						<?php 
+						print("window.location.href='./{$prev}';");
+						?>
+					}, 2000);
+					-->
+					</script>
+					<?php
+					}
+					elseif (isset($_SESSION['logged_user']) && isset($_SESSION['logged_userid']) && isset($_SESSION['logged_usertype'])) {
+						print (
+						"<div class='log-in-box-header'>
+							You are currently logged in, {$_SESSION['logged_user']}. Click <a href='log-in.php?logout=1'><b>here</b></a> to log out.
+						</div>");
+					}
+					else {
+					?>
+					<div class = 'log-in-box'>
+						<div class='log-in-box-header'>
+							  Log In
+						</div>
+						<div class='log-in-box-content'>
+							<form action="log-in.php" method="post">
+								<label for="uname">Username:</label>
+								<input type="text" name="username" id="uname"><br>
+								<label for="pw">Password:</label>
+								<input type="password" name="password" id="pw"><br>
+								<input type="submit" value="Submit" class='log-in-button'>
+							</form>
+						</div>
+					</div>
+				
+				<?php
+				}
+				}
+				else {
+					//this means there was an attempt to log in. We need to check db.
+					
+					//sanitize username first (no spaces in usernames! Should also prevent injection attempts bc spaces are needed.)
+					$post_username = preg_replace('/\s/', '', $post_username);
+					require_once '../config.php';
+					//Establish a database connection
+					$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+					
+					//Was there an error connecting to the database?
+					if ($mysqli->errno) {
+						//The page isn't worth much without a db connection so display the error and quit
+						print($mysqli->error);
+						exit();
+					}
+					$hashed_password = password_hash("password", PASSWORD_DEFAULT) . '<br>';
 
-      <div class="row log-in-content">
-        <?php
-          if (!$_SESSION['username']) { // user not logged in
-            print (
-              "<div class='log-in-box'>
-                <div class='log-in-box-header'>
-                  Log In
-                </div>
-                <div class='log-in-box-content'>
-                  <form method='POST' action='log-in.php'>
-                    Username: <input type='text' name='username'> <br>
-                    Password: <input type='password' name='password'> <br> <br>
+					//Un-comment this line to print out the hash of a password you enter.
+					//This value is what you need to enter into the hashpassword field in the database
+					//echo "<p>Hashed password: $hashed_password</p>";
+					
+					//Check for a record that matches the POSTed username
+					//Note: This SQL lacks proper security. That's coming later
+					$query = "SELECT * 
+								FROM users
+								WHERE
+									username = '$post_username'";
 
-                    <input class='log-in-button' type='submit' value='Submit'><br>
-                  </form>
-                </div>
-              </div>");
-
-              if ($_POST['username'] && $_POST['password']) { // check against password in db, and sanitize inputs
-                $_SESSION['username'] = $_POST['username'];
-                echo "<p> Success. You are logged in. </p>";
-              }   
-          } else { // user is already logged in
-            print(
-            "<div class='log-in-box'>
-              <div class='log-in-box-header'>
-                Log Out
-              </div>
-              <div class='log-in-box-content'>
-                <form method='POST' action='log-in.php'>
-                  <input class='log-in-button' type='submit' value='Log Out' name='log-out'> <br>
-                </form>
-              </div>
-            </div>");
-
-            if ($_POST['log-out']) {
-              unset($_SESSION['username']);
-              echo "<p> Successfully logged out. Goodbye. </p>";
-            }
-          } 
-        ?>
+					$result = $mysqli->query($query);
+					
+					//Make sure there is exactly one user with this username, otherwise ??
+					if ( $result && $result->num_rows == 1) {
+						
+						$row = $result->fetch_assoc();
+						//Debugging
+						//echo "<pre>" . print_r( $row, true) . "</p>";
+						
+						$db_hash_password = $row['pw'];
+						
+						//if password verification worked, set the session variables!
+						if( password_verify( $post_password, $db_hash_password ) ) {
+							$db_username = $row['username'];
+							$db_userid = $row['userid'];
+							$db_usertype = $row['usertype'];
+							$_SESSION['logged_user'] = $db_username;
+							$_SESSION['logged_userid'] = $db_userid;
+							$_SESSION['logged_usertype'] = $db_usertype;
+							//echo "Successful login!";
+						}
+						
+					}
+					$mysqli->close();
+					//make sure all are set
+					if (isset($_SESSION['logged_user']) && isset($_SESSION['logged_userid']) && isset($_SESSION['logged_usertype'])) {
+							//redirect to last page or to admin2.php
+							$prev = filter_input( INPUT_GET, 'prev', FILTER_SANITIZE_STRING );
+							if (empty($prev)){
+								$prev = "index.php";
+							}
+							print "<span class='success'><p>Success! You've been logged in, {$_SESSION['logged_user']}</p></span>";
+							print "<p>Go back <a href='{$prev}'>your last page</a></p>";
+					?>
+					<!-- Needs js enabled! -->
+					<script type="text/javascript">
+					<!--
+					window.setTimeout(function() {
+						<?php 
+						print("window.location.href='./{$prev}';");
+						?>
+					}, 2000);
+					-->
+					</script>
+				<?php
+					}
+					else {
+								echo "<span class='error'><p>You did not login successfully.</p></span>";
+								echo "<p>Please <a href='log-in.php'>try</a> again.</p>";
+							}
+				}
+				?>
+       
         
       </div>
-    </div>
+	  </div>
+	  </div> <!-- end div header -->
   </body>
 </html>
