@@ -24,7 +24,7 @@
         ?>
         <div id="sort">
 
-          <h1>Category Name</h1>
+          <h1>Category/Vendor Name</h1>
           <h3>Sort by:
             <select name="quantity">
               <option value="relevance">Relevance</option>
