@@ -8,13 +8,70 @@
 
       <?php include "../includes/navigation.php"; ?>
 
-      <div class="content">
-        <div id="box1"></div>
-        <div id="box2"></div>
-        <div id="box3"></div>
-        <div id="box4"></div>
-        <div id="box5"></div>
-        <div id="box6"></div>
+
+        <div id="sort">
+
+          <h1>Category Name</h1>
+          <h3>Sort by:
+            <select name="quantity">
+              <option value="relevance">Relevance</option>
+              <option value="pricehigh">Price: High to Low</option>
+              <option value="pricelow">Price: Low to High</option>
+              <option value="alphabetical">Alphabetical</option>
+              <option value="recent">Most Recent</option>
+            </select>
+          </h3>
+        </div>
+
+      <div class="gallery">
+       
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+
+        <a href="items.php?id=">
+          <div>
+            <img src="pants.jpg">
+            <h1>Title</h1>
+            <h2>Price</h2>
+          </div>
+        </a>
+      
       </div>
 
       <div class="footer">
