@@ -18,7 +18,7 @@
       </div>
 
       <div class="footer">
-        hi
+        <?php include "../includes/footer.php"; ?>
       </div>
     </div>
   </body>

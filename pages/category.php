@@ -18,7 +18,7 @@
       </div>
 
       <div class="footer">
-        hi
+        
       </div>
     </div>
   </body>
