@@ -271,6 +271,44 @@ p #brand {
 }
 
 /* ****************** */
+.other-content {
+	width: 100%;
+	display: block;
+	justify-content: center;
+	text-align: center;
+	background-color: black;
+//	color: white;
+	padding-top: 10px;
+  opacity: .8;
+}
 
+.log-in-button{
+	color: black;
+	//opacity: 1;
+}
+
+.log-in-box-content, .log-in-box-header{
+	color: white;
+	//opacity: 1;
+}
+
+.input{
+	color: black;
+}
+label {
+    display: inline-block;
+    width: 100px;
+}
+input {
+    width: 100px;
+}
+span.error{
+	color: rgb(255,128,0);
+	font-weight: bold;
+}
+span.success{
+	color: rgb(45,136,45);
+	font-weight: bold;
+}
 
 
