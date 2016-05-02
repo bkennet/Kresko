@@ -34,12 +34,7 @@
               <option value="recent">Most Recent</option>
             </select>
           </h3>
-          <?php
-          /*
-            Ajax will be used to update the gallery below based on how the user wants to 
-            sort each of the items in a particular category.
-          */
-          ?>
+
         </div>
 
       <div class="gallery">

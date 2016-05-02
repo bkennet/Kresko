@@ -1,76 +1,3 @@
-/******* Place CSS Below ********/
-/** {
-	padding: 0;
-	margin: 0;
-}*/
-
-/*.page-wrapper {
-	height: 100vh;	
-}*/
-
-/*.header {
-	height: 20%;
-	width: 100%;
-	border: 2px solid black;
-}*/
-
-/*.sign-in {
-	height: 15%;
-	border: 2px solid black;
-}*/
-
-/*.title {
-	border: 2px solid purple;
-	height: 65%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}*/
-
-/*.content {
-	height: 80vh;
-	border: 2px solid gold;
-	width: 100%;
-}*/
-
-/*.navigation {
-	height: 20%;
-	width: 100%;
-	border: 2px solid black;
-}*/
-
-/* For log in page */
-
-/*.log-in-content {
-	height: 80vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.log-in-box {
-	height: 25%;
-	width: 30%;
-	border: 2px dashed black;
-	border-radius: 7%;
-}
-
-.log-in-box-header {
-	text-align: center; 
-	height: 20%; 
-	width: 100%
-}
-
-.log-in-box-content {
-	height: 80%;
-	width: 80%;
-	margin: 0 auto;
-}
-
-.log-in-button {
-	margin: 0 40% 0 40%;
-}*/
 
 /******* Place CSS Below ********/
 @font-face {
@@ -280,7 +207,7 @@ p #brand {
 	justify-content: center;
 	text-align: center;
 	background-color: black;
-//	color: white;
+	color: white;
 	padding-top: 10px;
   opacity: .8;
 }
@@ -292,7 +219,7 @@ p #brand {
 
 .log-in-box-content, .log-in-box-header{
 	color: white;
-	//opacity: 1;
+	opacity: 1;
 }
 
 .input{
@@ -438,6 +365,40 @@ input:-webkit-autofill {
 	margin-left: 160px;
 	margin-bottom: 30px;
 }
+
+
+/* For artisans page */
+.content-artisans {
+	display: flex;
+	width: 100%;
+	height: 820px;
+	border: 2px solid gold;
+	flex-direction: column;
+	align-items: center;
+}
+
+.vendor {
+	display: flex;
+	flex-direction: row;
+	height: 33%;
+	width: 80%;
+	border-bottom: 1px solid white;
+}
+
+.vendor-image {
+	height: 60%;
+	width: 60%;
+	border: 1px solid white;
+}
+
+.white {
+	color: white;
+}
+
+.center {
+	text-align: center
+}
+
 
 
 

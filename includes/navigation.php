@@ -1,8 +1,6 @@
 
      
 <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
-
-
   <div class="login">
     <a href ="./log-in.php">LOGIN</a>
     <a href = "./cart.php">BAG</a>
@@ -14,7 +12,7 @@
 
   <div class="navigation">
     <div class="col-md-4">
-      <a href ="artisans.php">ARTISANS</a>
+      <a href="artisans.php">ARTISANS</a>
     </div>
     <div class="col-md-4 dropdown">
       <a href ="../pages/category.php?id=clothing">CLOTHING</a>
