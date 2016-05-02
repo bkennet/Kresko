@@ -2,3 +2,4 @@
 <title>Kresko: Artisinal Crafts and Products</title>
 <link rel='stylesheet' type='text/css' href='../css/main.css'>
 <link rel='stylesheet' type='text/css' href='../css/bootstrap.css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

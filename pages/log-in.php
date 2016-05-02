@@ -9,7 +9,7 @@
 
       <div class="row header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
         <div class="sign-in">
-          <a href='./login.php'> Sign-in/Sign-out </a> 
+          <a href='./login.php'> Sign-in/Sign-out</a> 
         </div>
 
         <div class="title">
