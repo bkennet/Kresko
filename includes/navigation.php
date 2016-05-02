@@ -17,7 +17,7 @@
       <a href ="artisans.php">ARTISANS</a>
     </div>
     <div class="col-md-4 dropdown">
-      <a href ="clothing.php">CLOTHING</a>
+      <a href ="./category.php">CLOTHING</a>
         <div class="dropdown-content">
           <a href="#home">Shirts</a>
           <a href="#about">Sweaters</a>
