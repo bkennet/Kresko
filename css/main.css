@@ -412,7 +412,13 @@ input:-webkit-autofill {
 	text-align: center
 }
 
-
-
+.edit-description{
+	color: black;
+	width: 300px;
+	height: 200;
+}
+h3{
+	text-align: center;
+}
 
 
