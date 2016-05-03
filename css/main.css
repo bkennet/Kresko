@@ -398,6 +398,17 @@ input:-webkit-autofill {
 	border-bottom: 1px solid white;
 }
 
+.vendor-edit {
+	display: flex;
+	flex-direction: row;
+	height: 33%;
+	width: 80%;
+}
+
+.vendor-info {
+	padding-left: 20px;
+}
+
 .vendor-image {
 	height: 60%;
 	width: 60%;
@@ -449,16 +460,41 @@ input:-webkit-autofill {
 }
 /* ********* */
 
-
-
 .edit-description{
 	color: black;
-	width: 300px;
-	height: 200;
+	width: 500px;
+	height: 100px;
 }
-h3{
+/*h3{
 	text-align: center;
+}*/
+
+.textbig{
+	font-size: 20px;
 }
 
+.new-item-body input {
+	color: black;
 
+}
+.new-item-body label {
+	width: 250px;
 
+}
+.new-item-body select {
+	width: 200px;
+
+}
+.new-item-body{
+	display: flex;
+	width: 100%;
+	height: 820px;
+/*	border: 2px solid gold;*/
+	flex-direction: column;
+	align-items: center;
+}
+
+.iteminputs {
+	color: white;
+	margin-bottom: 10px;
+}

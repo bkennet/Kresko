@@ -25,7 +25,7 @@
         <div id="sort">
 
           <h1>Category/Vendor Name</h1>
-          <h3>Sort by:
+          <span class='white'>Sort by:</span>
             <select name="quantity">
               <option value="relevance">Relevance</option>
               <option value="pricehigh">Price: High to Low</option>
@@ -33,8 +33,12 @@
               <option value="alphabetical">Alphabetical</option>
               <option value="recent">Most Recent</option>
             </select>
-          </h3>
-
+            <br>
+          <?php
+            if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
+              print ("<a href='./add-item.php' class='textbig'>CREATE NEW ITEM</a>");
+            } 
+          ?>  
         </div>
 
       <div class="gallery">
