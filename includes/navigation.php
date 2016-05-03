@@ -1,7 +1,14 @@
 <?php session_start(); ?> 
 <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
   <div class="login">
-    <a href ="./log-in.php">LOGIN</a>
+    <?php
+    if (isset($_SESSION['logged_usertype'])){
+      print("<a href='./log-in.php?logout=1'>LOG OUT</a>");
+    }
+    else {
+      print("<a href='./log-in.php'>LOG IN</a>");
+    }
+    ?>
     <a href = "./cart.php">BAG</a>
   </div>
 
@@ -10,8 +17,8 @@
   </div>
   <?php
     //unset($_SESSION['usertype']);
-    $_SESSION['usertype']=3;
-    if ($_SESSION['usertype']==2) {
+    $_SESSION['logged_usertype']=2;
+    if ($_SESSION['logged_usertype']==2) {
   ?>
   <div class="navigation">
     <div class="col-md-4">
@@ -25,7 +32,7 @@
     </div>
   </div>
   <?php 
-    } else if ($_SESSION['usertype']==1) {
+    } else if ($_SESSION['logged_usertype']==1) {
   ?>
   <div class="navigation">
     <div class="col-md-6">

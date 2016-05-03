@@ -8,7 +8,7 @@
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
 			<?php include '../includes/navigation.php'; ?>
-      <div class="other-content">
+      <div class="log-in-content">
 			<?php 
 				//Get username, password variables from POST, sanitize
 				$post_username = filter_input( INPUT_POST, 'username', FILTER_SANITIZE_STRING );
@@ -56,10 +56,16 @@
 						</div>
 						<div class='log-in-box-content'>
 							<form action="log-in.php" method="post">
-								<label for="uname">Username:</label>
-								<input type="text" name="username" id="uname"><br>
-								<label for="pw">Password:</label>
-								<input type="password" name="password" id="pw"><br>
+								<div class="log-in-inputs">
+									<label for="uname">Username:</label>
+									<input type="text" name="username" id="uname">
+								</div>
+								<br>
+								<div class='log-in-inputs'>
+									<label for="pw">Password:</label>
+									<input type="password" name="password" id="pw">
+								</div>
+								<br>
 								<input type="submit" value="Submit" class='log-in-button'>
 							</form>
 						</div>
@@ -147,9 +153,9 @@
 								echo "<p>Please <a href='log-in.php'>try</a> again.</p>";
 							}
 				}
-				?>
-       
-        
-      </div>
+			?>
+       </div>
+        <?php include "../includes/footer.php"; ?>
+    </div>
   </body>
 </html>

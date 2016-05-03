@@ -1,4 +1,3 @@
-
 /******* Place CSS Below ********/
 @font-face {
 	font-family: audrey;
@@ -201,15 +200,17 @@ p #brand {
 }
 
 /* ****************** */
-.other-content {
+.log-in-content {
 	width: 100%;
-	display: block;
+	height: 600px;
+	display: flex;
+	align-items: center;
 	justify-content: center;
 	text-align: center;
 	background-color: black;
 	color: white;
 	padding-top: 10px;
-  opacity: .8;
+  	/*opacity: .8;*/
 }
 
 .log-in-button{
@@ -217,21 +218,33 @@ p #brand {
 	//opacity: 1;
 }
 
-.log-in-box-content, .log-in-box-header{
-	color: white;
-	opacity: 1;
+.log-in-box {
+	margin-bottom: 30px;
 }
 
-.input{
+.log-in-box-header {
+	padding-bottom: 20px;
+}
+
+/*.log-in-inputs {
+	margin-bottom: 2px;
+}*/
+
+.log-in-box-content, .log-in-box-header{
+	color: white;
+	font-size: 20px;
+}
+
+.log-in-box input {
 	color: black;
+	width: 200px;
+
 }
 label {
     display: inline-block;
     width: 100px;
 }
-input {
-    width: 100px;
-}
+
 span.error{
 	color: rgb(255,128,0);
 	font-weight: bold;
@@ -244,7 +257,7 @@ span.success{
 /*Items page*/
 
 .itemscontent{
-	margin-bottom: 50px;
+	/*margin-bottom: 50px;*/
 	margin-right: 15px;
 	height: 820px;
 	width: 100%;
