@@ -1,4 +1,3 @@
-<?php session_start(); ?> 
 <div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
   <div class="login">
     <?php
