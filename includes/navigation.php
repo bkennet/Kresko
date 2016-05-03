@@ -16,7 +16,7 @@
   </div>
   <?php
     //unset($_SESSION['usertype']);
-    // $_SESSION['logged_usertype']=2;
+    // $_SESSION['logged_usertype']=1;
     if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
   ?>
   <div class="navigation">

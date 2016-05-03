@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 <div>
-
 	<div id="contact">
 		<h3>Contact Us:</h3>
 		<p>email: abcd1234@gmail.com</p>
