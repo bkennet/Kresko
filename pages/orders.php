@@ -33,7 +33,7 @@
         <!-- Example Order View -->
         <div class="order">
           <div class="order-details">
-            <p class="white">OrderID:> <span class="order-info">HSAF1234</span> </p>
+            <p class="white">OrderID: <span class="order-info">HSAF1234</span> </p>
             <div class='flex-row'>
               <p class="white">Order Status:  <span class="order-info">Shipped</span>  </p>
               <?php
