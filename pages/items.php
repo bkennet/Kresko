@@ -1,9 +1,11 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
   </head>
   <body>
+    <div class="container-fluid page-wrapper">
     <?php include "../includes/navigation.php"; ?>
 
     <div class="itemscontent">
@@ -62,7 +64,6 @@
     <div class="footer">
       <?php include "../includes/footer.php"; ?>
     </div>
-    
     </div>
   </body>
 </html>

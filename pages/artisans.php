@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,18 +31,35 @@
           ?>
 
         <div class="vendor">
-          <img class="vendor-image" src"#" alt="artisan-image"/>
+          <img class="vendor-image" src="#" alt="artisan-image"/>
           <div class='vendor-info'>
-            <a href="./category.php?vendorID=1"> <h3 class="white">Artisan Name</h3></a>
+            <?php
+              if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1){
+                print("
+                    <a href='./profile.php?vendorID=1'><h3 class='white'>Artisan Name</h3></a>
+                  ");
+              } else {
+                print ("<a href='./category.php?vendorID=1'><h3 class='white'>Artisan Name</h3></a>");
+              }
+            ?>
             <p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div> 
         </div>
 
         <div class="vendor">
           
-          <img class="vendor-image" src"#" alt="artisan-image"/>
+          <img class="vendor-image" src="#" alt="artisan-image"/>
           <div class='vendor-info'>
-            <a href="./category.php?vendorID=2"><h3 class="white">Artisan Name</h3></a>
+            <?php
+              if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1){
+                print("
+                    <a href='./profile.php?vendorID=2'><h3 class='white'>Artisan Name</h3></a>
+                  ");
+              } else {
+                print ("<a href='./category.php?vendorID=2'><h3 class='white'>Artisan Name</h3></a>");
+              }
+            ?>
+            
             <p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
         </div>

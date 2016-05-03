@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,7 +21,7 @@
             <br>
             <div class="iteminputs">
               <label for="descriptionid">Item description:</label>
-              <textarea rows='4' wrap='virtual' class="edit-description" id="descriptionid" name="item-desc">Edit description here. Please include a description that is enticing to your user.</textarea>
+              <textarea rows='4' class="edit-description" id="descriptionid" name="item-desc">Edit description here. Please include a description that is enticing to your user.</textarea>
             </div>
             <br>
             <div class="iteminputs">
@@ -69,7 +70,6 @@
              */
           ?>
         </div>
-    </div>
       <div class="footer">
         <?php include "../includes/footer.php"; ?>
       </div>

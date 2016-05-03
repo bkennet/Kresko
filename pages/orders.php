@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -32,11 +33,11 @@
         <!-- Example Order View -->
         <div class="order">
           <div class="order-details">
-            <p class="white">OrderID: <span class="order-info">HSAF1234</span> </p>
+            <p class="white">OrderID:> <span class="order-info">HSAF1234</span> </p>
             <div class='flex-row'>
-              <p class="white">Order Status:  <span class="order-info">Shipped</span> 
+              <p class="white">Order Status:  <span class="order-info">Shipped</span>  </p>
               <?php
-                if ($_SESSION['logged_usertype'] == 1) { // user is admin
+                if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1) { // user is admin
                   // Admin will be able to click on this button and change the order status of a specific order.
                   /* Pseudo code
                     1. connect to mysql
@@ -54,7 +55,6 @@
                 } 
               ?>
             </div>
-            </p>
             <p class="white">Ordered Placed On:  <span class="order-info">2/24/2016</span> </p>
             <p class="white">Ship to:  <span class="order-info">123 Garden Street, Oakland, CA</span> </p>
           </div>
@@ -89,9 +89,9 @@
           <div class="order-details">
             <p class="white">OrderID: <span class="order-info">XYS12432</span> </p>
             <div class='flex-row'>
-              <p class="white">Order Status:  <span class="order-info">Not Shipped</span> 
+              <p class="white">Order Status:  <span class="order-info">Not Shipped</span> </p>
               <?php
-                if ($_SESSION['logged_usertype'] == 1) { // user is admin
+                if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1) { // user is admin
                   // Admin will be able to click on this button and change the order status of a specific order.
                   /* Pseudo code
                     1. connect to mysql
@@ -109,8 +109,8 @@
                 } 
               ?>
             </div>
-            <p class="white">Order Placed On: <span class="order-info">3/13/2016<span class="order-info"></p>
-            <p class="white">Ship to: <span class="order-info">102 B Baker Street, London, UK</p>
+            <p class="white">Order Placed On: <span class="order-info">3/13/2016</span>></p>
+            <p class="white">Ship to: <span class="order-info">102 B Baker Street, London, UK</span></p>
           </div>
           <table class='table-borders'>
             <tr class='table-borders'>

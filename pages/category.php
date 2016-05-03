@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -57,7 +58,7 @@
        
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
@@ -65,7 +66,7 @@
 
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
@@ -73,7 +74,7 @@
 
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
@@ -81,14 +82,14 @@
 
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
         </a>
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
@@ -96,7 +97,7 @@
 
         <a href="items.php?id=">
           <div>
-            <img src="pants.jpg">
+            <img src="pants.jpg" alt="pants">
             <h1>Title</h1>
             <h2>Price</h2>
           </div>
