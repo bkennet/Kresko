@@ -26,7 +26,9 @@
 	-->
     <div class="itemdesc">
       <h1 id="name">Name</h1>
-	 <!-- Editable if user is logged in as vendor associated with this item -->
+	 <!-- Editable if user is logged in as vendor associated with this item 
+	 (display editable field instead of h1 tag))
+	 -->
       <h1 id="price">$50.00</h1>
       <h2>Vendor</h2>
 
@@ -44,7 +46,8 @@
           <option value="10">10</option>
         </select>
       </h2>
-		<!-- Editable if user is logged in user associated with this item -->
+		<!-- Editable if user is logged in user associated with this item (display editable textarea instead of h3 tag)-->
+		
       <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
 
 	  <!-- Plan for cart is currently to add to paypal cart, to be implemented later -->
