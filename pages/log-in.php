@@ -103,7 +103,7 @@
 						
 						$row = $result->fetch_assoc();
 						//Debugging
-						//echo "<pre>" . print_r( $row, true) . "</p>";
+						echo "<pre>" . print_r( $row, true) . "</p>";
 						
 						$db_hash_password = $row['pw'];
 						

@@ -10,7 +10,7 @@
   </div>
   <?php
     //unset($_SESSION['usertype']);
-    $_SESSION['usertype']=2;
+    $_SESSION['usertype']=3;
     if ($_SESSION['usertype']==2) {
   ?>
   <div class="navigation">
