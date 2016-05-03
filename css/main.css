@@ -1,78 +1,4 @@
 /******* Place CSS Below ********/
-/** {
-	padding: 0;
-	margin: 0;
-}*/
-
-/*.page-wrapper {
-	height: 100vh;	
-}*/
-
-/*.header {
-	height: 20%;
-	width: 100%;
-	border: 2px solid black;
-}*/
-
-/*.sign-in {
-	height: 15%;
-	border: 2px solid black;
-}*/
-
-/*.title {
-	border: 2px solid purple;
-	height: 65%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}*/
-
-/*.content {
-	height: 80vh;
-	border: 2px solid gold;
-	width: 100%;
-}*/
-
-/*.navigation {
-	height: 20%;
-	width: 100%;
-	border: 2px solid black;
-}*/
-
-/* For log in page */
-
-/*.log-in-content {
-	height: 80vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.log-in-box {
-	height: 25%;
-	width: 30%;
-	border: 2px dashed black;
-	border-radius: 7%;
-}
-
-.log-in-box-header {
-	text-align: center; 
-	height: 20%; 
-	width: 100%
-}
-
-.log-in-box-content {
-	height: 80%;
-	width: 80%;
-	margin: 0 auto;
-}
-
-.log-in-button {
-	margin: 0 40% 0 40%;
-}*/
-
-/******* Place CSS Below ********/
 @font-face {
 	font-family: audrey;
 	src: url(../fonts/Audrey-Normal.otf);
@@ -274,15 +200,17 @@ p #brand {
 }
 
 /* ****************** */
-.other-content {
+.log-in-content {
 	width: 100%;
-	display: block;
+	height: 600px;
+	display: flex;
+	align-items: center;
 	justify-content: center;
 	text-align: center;
 	background-color: black;
-//	color: white;
+	color: white;
 	padding-top: 10px;
-  opacity: .8;
+  	/*opacity: .8;*/
 }
 
 .log-in-button{
@@ -290,21 +218,33 @@ p #brand {
 	//opacity: 1;
 }
 
-.log-in-box-content, .log-in-box-header{
-	color: white;
-	//opacity: 1;
+.log-in-box {
+	margin-bottom: 30px;
 }
 
-.input{
+.log-in-box-header {
+	padding-bottom: 20px;
+}
+
+/*.log-in-inputs {
+	margin-bottom: 2px;
+}*/
+
+.log-in-box-content, .log-in-box-header{
+	color: white;
+	font-size: 20px;
+}
+
+.log-in-box input {
 	color: black;
+	width: 200px;
+
 }
 label {
     display: inline-block;
     width: 100px;
 }
-input {
-    width: 100px;
-}
+
 span.error{
 	color: rgb(255,128,0);
 	font-weight: bold;
@@ -317,7 +257,7 @@ span.success{
 /*Items page*/
 
 .itemscontent{
-	margin-bottom: 50px;
+	/*margin-bottom: 50px;*/
 	margin-right: 15px;
 	height: 820px;
 	width: 100%;
@@ -472,31 +412,125 @@ input:-webkit-autofill {
 	margin-bottom: 30px;
 }
 
-
 #about p {
 	opacity: .8;
 }
 
-.catprice {
-	text-align: left;
+/* For artisans page */
+.content-artisans {
+	display: flex;
 	width: 100%;
-	padding-right: 30px;
+	height: 820px;
+	border: 2px solid gold;
+	flex-direction: column;
+	align-items: center;
 }
 
-.catvendor {
-	text-align: right;
-/*	width: 100%;*/
+.vendor {
+	display: flex;
+	flex-direction: row;
+	height: 33%;
+	width: 80%;
+	border-bottom: 1px solid white;
 }
 
-table {
-	width: 90%;
-	margin-left: 150px;
+.vendor-edit {
+	display: flex;
+	flex-direction: row;
+	height: 33%;
+	width: 80%;
 }
 
-td {
-	width: 30%;
-/*	padding-left: 50px;*/
+.vendor-info {
+	padding-left: 20px;
+}
+
+.vendor-image {
+	height: 60%;
+	width: 60%;
+	border: 1px solid white;
+}
+
+.white {
+	color: white;
+}
+
+.center {
+	text-align: center
 }
 
 
 
+/* Orders Page */
+.content-orders {
+	display: flex;
+	width: 100%;
+	height: 820px;
+/*	border: 2px solid gold;*/
+	flex-direction: column;
+	align-items: center;
+}
+
+.order { /*div that surrounds one particular order */
+	/*display: flex;*/
+	border: 1px solid white;
+	margin-bottom: 30px;
+}
+
+.order-details {
+	/*display: flex;*/
+}
+
+.order-info {
+	color: green;
+}
+
+.table-borders {
+	border: 1px solid white;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+/* ********* */
+
+.edit-description{
+	color: black;
+	width: 500px;
+	height: 100px;
+}
+/*h3{
+	text-align: center;
+}*/
+
+.textbig{
+	font-size: 20px;
+}
+
+.new-item-body input {
+	color: black;
+
+}
+.new-item-body label {
+	width: 250px;
+
+}
+.new-item-body select {
+	width: 200px;
+
+}
+.new-item-body{
+	display: flex;
+	width: 100%;
+	height: 820px;
+/*	border: 2px solid gold;*/
+	flex-direction: column;
+	align-items: center;
+}
+
+.iteminputs {
+	color: white;
+	margin-bottom: 10px;
+}

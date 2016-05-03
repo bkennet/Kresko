@@ -24,8 +24,8 @@
         ?>
         <div id="sort">
 
-          <h1>Category Name</h1>
-          <h3>Sort by:
+          <h1>Category/Vendor Name</h1>
+          <span class='white'>Sort by:</span>
             <select name="quantity">
               <option value="relevance">Relevance</option>
               <option value="pricehigh">Price: High to Low</option>
@@ -33,13 +33,12 @@
               <option value="alphabetical">Alphabetical</option>
               <option value="recent">Most Recent</option>
             </select>
-          </h3>
+            <br>
           <?php
-          /*
-            Ajax will be used to update the gallery below based on how the user wants to 
-            sort each of the items in a particular category.
-          */
-          ?>
+            if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
+              print ("<a href='./add-item.php' class='textbig'>CREATE NEW ITEM</a>");
+            } 
+          ?>  
         </div>
 
       <div class="gallery">

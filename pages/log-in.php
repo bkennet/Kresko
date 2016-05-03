@@ -6,31 +6,9 @@
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
-		<img id='homepicture' src="../images/misc/background.jpg" alt='hi'>
-     
-		<div class="header"> <!-- Header: Logo, Title, Little Blurb, Navigation Bar -->
 
-		  <div class="login">
-			<a href ="./log-in.php">LOGIN</a>
-			<a href = "cart.php">BAG</a>
-		  </div>
-
-		  <div class="title">
-			  <a id="brand" href ="index.php">KRESKO</a>
-		  </div>
-
-		  <div class="navigation">
-			<div class="col-md-4">
-			  <a href ="artisans.php">ARTISANS</a>
-			</div>
-			<div class="col-md-4">
-			  <a href ="clothing.php">CLOTHING</a>
-			</div>
-			<div class="col-md-4">
-			  <a href ="accessories.php">ACCESSORIES</a>
-			</div>
-		  </div>
-      <div class="other-content">
+			<?php include '../includes/navigation.php'; ?>
+      <div class="log-in-content">
 			<?php 
 				//Get username, password variables from POST, sanitize
 				$post_username = filter_input( INPUT_POST, 'username', FILTER_SANITIZE_STRING );
@@ -78,10 +56,16 @@
 						</div>
 						<div class='log-in-box-content'>
 							<form action="log-in.php" method="post">
-								<label for="uname">Username:</label>
-								<input type="text" name="username" id="uname"><br>
-								<label for="pw">Password:</label>
-								<input type="password" name="password" id="pw"><br>
+								<div class="log-in-inputs">
+									<label for="uname">Username:</label>
+									<input type="text" name="username" id="uname">
+								</div>
+								<br>
+								<div class='log-in-inputs'>
+									<label for="pw">Password:</label>
+									<input type="password" name="password" id="pw">
+								</div>
+								<br>
 								<input type="submit" value="Submit" class='log-in-button'>
 							</form>
 						</div>
@@ -125,7 +109,7 @@
 						
 						$row = $result->fetch_assoc();
 						//Debugging
-						//echo "<pre>" . print_r( $row, true) . "</p>";
+						echo "<pre>" . print_r( $row, true) . "</p>";
 						
 						$db_hash_password = $row['pw'];
 						
@@ -169,11 +153,9 @@
 								echo "<p>Please <a href='log-in.php'>try</a> again.</p>";
 							}
 				}
-				?>
-       
-        
-      </div>
-	  </div>
-	  </div> <!-- end div header -->
+			?>
+       </div>
+        <?php include "../includes/footer.php"; ?>
+    </div>
   </body>
 </html>
