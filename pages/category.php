@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -79,13 +80,14 @@
 
         <a href="items.php?id=">
           <div>
+
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Total Freedom Relaxed Classic Fit Flat Front Pant</h1>
               <h2>Lee</h2>
               <h2 class="catprice">$21.33</h2>
             </div>
-          </div>
+         </div>
         </a>
 
         <a href="items.php?id=">

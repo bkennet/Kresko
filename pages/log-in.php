@@ -26,7 +26,7 @@
 							if (empty($prev)){
 								$prev = "index.php";
 							}
-							print "<div class='log-in-box-header'><span class='success'><p>Success! You've been logged out!</p></span>";
+							print "<div class='log-in-box-header'><span class='success'><p>Success! You've been logged out!</p></span><br>";
 							print "<p>Go back to <a href='{$prev}'>your last page</a></p></div>";
 					
 					?>
@@ -45,7 +45,7 @@
 					elseif (isset($_SESSION['logged_user']) && isset($_SESSION['logged_userid']) && isset($_SESSION['logged_usertype'])) {
 						print (
 						"<div class='log-in-box-header'>
-							You are currently logged in, {$_SESSION['logged_user']}. Click <a href='log-in.php?logout=1'><b>here</b></a> to log out.
+							You are currently logged in, {$_SESSION['logged_user']}.<br>Click <a href='log-in.php?logout=1'><b>here</b></a> to log out.
 						</div>");
 					}
 					else {
@@ -109,7 +109,7 @@
 						
 						$row = $result->fetch_assoc();
 						//Debugging
-						echo "<pre>" . print_r( $row, true) . "</p>";
+						// echo "<pre>" . print_r( $row, true) . "</p>";
 						
 						$db_hash_password = $row['pw'];
 						
@@ -133,7 +133,7 @@
 							if (empty($prev)){
 								$prev = "index.php";
 							}
-							print "<span class='success'><p>Success! You've been logged in, {$_SESSION['logged_user']}</p></span>";
+							print "<span class='success'><p>Success! You've been logged in, {$_SESSION['logged_user']}</p></span><br>";
 							print "<p>Go back <a href='{$prev}'>your last page</a></p>";
 					?>
 					<!-- Needs js enabled! -->
@@ -156,9 +156,9 @@
 			?>
        </div>
 
-       <div class="footer">
-        <?php include "../includes/footer.php"; ?>
-       </div>
+       	<div class="footer">
+        	<?php include "../includes/footer.php"; ?>
+        </div>
     </div>
   </body>
 </html>
