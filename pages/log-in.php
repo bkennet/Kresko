@@ -155,7 +155,10 @@
 				}
 			?>
        </div>
+
+       <div class="footer">
         <?php include "../includes/footer.php"; ?>
+       </div>
     </div>
   </body>
 </html>

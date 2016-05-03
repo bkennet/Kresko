@@ -60,8 +60,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Original 874 Work Pant</h1>
+              <h2>Dickies</h2>
               <h2 class="catprice">$62.00</h2>
-              <h2 class="catvendor">Dickies</h2>
             </div>
           </div>
         </a>
@@ -71,8 +71,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Cool 18 Hidden Expandable-Waist Plain-Front Pant</h1>
-              <h2>$25.00</h2>
               <h2>Haggar</h2>
+              <h2 class="catprice">$25.00</h2>
             </div>
           </div>
         </a>
@@ -82,8 +82,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Total Freedom Relaxed Classic Fit Flat Front Pant</h1>
-              <h2>$21.33</h2>
               <h2>Lee</h2>
+              <h2 class="catprice">$21.33</h2>
             </div>
           </div>
         </a>
@@ -93,8 +93,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Slim-Tapered Flat-Front Casual Pants</h1>
-              <h2>$17.99</h2>
               <h2>Match</h2>
+              <h2 class="catprice">$17.99</h2>
             </div>
           </div>
         </a>
@@ -103,8 +103,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Running Trousers</h1>
-              <h2>14.98</h2>
               <h2>Hemoon</h2>
+              <h2 class="catprice">14.98</h2>
             </div>
           </div>
         </a>
@@ -114,8 +114,8 @@
             <img src="../images/pants/pants1.jpg">
             <div class="gridinfo">
               <h1>Slim Tapered Stretchy Casual Pant #8050</h1>
-              <h2>$15.99</h2>
               <h2>Match</h2>
+              <h2 class="catprice">$15.99</h2>
             </div>
           </div>
         </a>

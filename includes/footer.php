@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<div>
+
 
 	<div id="contact">
 		<h3>Contact Us:</h3>
@@ -21,5 +20,4 @@
 		</ul>
 	</div>
 			
-	<p>&copy; www.kresko.com 2016</p>
-</div>
+	<p id="copyright">&copy; www.kresko.com 2016</p>

@@ -8,7 +8,7 @@
       print("<a href='./log-in.php'>LOG IN</a>");
     }
     ?>
-    <a href = "./cart.php">BAG</a>
+    <a href = "./bag.php">BAG</a>
   </div>
 
   <div class="title">

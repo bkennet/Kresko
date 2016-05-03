@@ -11,12 +11,48 @@
       <?php include "../includes/navigation.php"; ?>
 
       <div class="content">
-        <div id="box1"></div>
-        <div id="box2"></div>
-        <div id="box3"></div>
-        <div id="box4"></div>
-        <div id="box5"></div>
-        <div id="box6"></div>
+        <a href="#">
+          <div id="box1">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="box2">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="box3">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="box4">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="box5">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="box6">
+            <div class="promo">Promotion</div>
+            <img class="promopic" src="../images/pants/pants1.jpg" alt="trial">
+          </div>
+        </a>
+      
       </div>
 
       <div class="footer">
