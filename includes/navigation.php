@@ -17,7 +17,7 @@
   </div>
   <?php
     //unset($_SESSION['usertype']);
-    $_SESSION['logged_usertype']=2;
+    $_SESSION['logged_usertype']=1;
     if ($_SESSION['logged_usertype']==2) {
   ?>
   <div class="navigation">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <?php 
-    } else if ($_SESSION['logged_usertype']==1) {
+    } else if ($_SESSION['logged_usertype'] == 1) {
   ?>
   <div class="navigation">
     <div class="col-md-6">

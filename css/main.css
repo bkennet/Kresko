@@ -413,6 +413,41 @@ input:-webkit-autofill {
 }
 
 
+/* Orders Page */
+.content-orders {
+	display: flex;
+	width: 100%;
+	height: 820px;
+/*	border: 2px solid gold;*/
+	flex-direction: column;
+	align-items: center;
+}
+
+.order { /*div that surrounds one particular order */
+	/*display: flex;*/
+	border: 1px solid white;
+	margin-bottom: 30px;
+}
+
+.order-details {
+	/*display: flex;*/
+}
+
+.order-info {
+	color: green;
+}
+
+.table-borders {
+	border: 1px solid white;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+/* ********* */
+
 
 
 
