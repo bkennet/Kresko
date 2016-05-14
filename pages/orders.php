@@ -3,148 +3,116 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+	<?php include "../functions/queries.php"; ?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
       <?php include "../includes/navigation.php"; ?>
+	  <div class="content-orders">
+	  <?php
+	   require_once '../config.php';
+          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		
+          if (!isset($_SESSION['logged_usertype']) || ($_SESSION['logged_usertype'] != 2 && $_SESSION['logged_usertype'] != 1)) { // then vendor or admin is logged in
+            print("<span class='error'>Sorry, you are not authorized to view this page.</span>");
+          }
+		  else {
+			  $isadmin = 0;
+			  if ($_SESSION['logged_usertype'] == 1){
+				 $isadmin = 1;
+			  }
+			$query = isuservendor($_SESSION['logged_userid']);
+			
+			$result = $mysqli->query($query);
+			if ($result) {
+				if ($isadmin == 1)
+					$query = getallorders();
+				else {
+					$query = getordersbyvendor($_SESSION['logged_userid']);
+				}
+				$result = $mysqli->query($query);
+				if (!$result) {
+					print($mysqli->error);
+					exit();
+				}
+				if ($result->num_rows == 0){
+					print("No orders associated with this vendor!");
+				}
+				else {
+					while ($row = $result->fetch_assoc()) {
+						$currentorderid = $row['orderid'];
+						print("
+							<div class='order'>
+							  <div class='order-details'>
+								<p class='white'>OrderID: <span class='order-info'>{$currentorderid}</span> </p>
+								<div class='flex-row'>
+								  <p class='white'>Order Status:  <span class='order-info'>Status code: {$row['status']}</span>  </p>");
+									if ($isadmin == 1) { // user is admin
+									  // Admin will be able to click on this button and change the order status of a specific order.
+									  /* Pseudo code
+										1. connect to mysql
 
-      <div class="content-orders">
-        <h2 class="white">Manage Your Orders</h2>
-        <?php
-          /*
-            1. Connect to database
-            $mysqli = new mysqli(db, host, username, password);
+										2. construct update query
+										  $updateQuery = 'UPDATE `orders` SET orderStatus= [opposite of current order status] WHERE orderID=[a particular orderID]';
+										3. Run update query on database
 
-            2. Generate Query
-            $query = sql string that will return all orders from the currently
-                     logged in vendor. 
+										$result = $mysqli->query($updateQuery);
+									  */
+										
+									  print ("<form method='post' action='./orders.php'>
+												<input type='hidden' name='orderid' value='{$row['orderid']}'>
+												<input type='hidden' name='orderstatus' value='{$row['status']}'>
+												<input type='submit' value='Toggle Order Status' />
+											  </form>");
+									} 
+								print ("  
+								</div>
+								<p class='white'>Ordered Placed On:  <span class='order-info'>{$row['creation_date']}</span> </p>
+								<p class='white'>Ship to:  <span class='order-info'>{$row['address']}</span> </p>
+							  </div>
+							  <table class='table-borders'>
+								<tr class='table-borders'>
+								  <th class='white table-borders'>Item</th>
+								  <th class='white table-borders'>Qty. Ordered</th>
+								  <th class='white table-borders'>Revenue</th>
+								</tr>");
+								$query2 = getorderitems($currentorderid);
+								$result2 = $mysqli->query($query2);
+								if (!$result2) {
+									print($mysqli->error);
+									exit();
+								}
+								if ($result2->num_rows == 0){
+									print("<tr><td class='white' colspan='3'>No items associated with this order!</td></tr>");
+								}
+								else {
+									while ($row2 = $result2->fetch_assoc()) {
+										$revenue = $row2['price'] * $row2['quantity'];
+										print("
+										<tr>
+										  <td class='white table-borders'>{$row2['itemname']}</td>
+										  <td class='white table-borders'>{$row2['quantity']}</td>
+										  <td class='white table-borders'>{$revenue}</td>
+										</tr>");
+									}
+									print("
+										<tr>
+										  <td  class='white' colspan='3'>There may be additional items in this order not associated with this vendor.</td>
+										</tr>");
+									}
+									  print("
+									  </table>
+									</div>");
+					}
+				}
+				}
+		  }
+	 ?>
 
-            3. 
-            $result = $mysqli->query($query);
-
-            4.
-            $rows = $result->fetch_assoc();
-
-            5.Loop over rows, generate a list of orders 
-
-          */  
-        ?>
-        <!-- Example Order View -->
-        <div class="order">
-          <div class="order-details">
-            <p class="white">OrderID: <span class="order-info">HSAF1234</span> </p>
-            <div class='flex-row'>
-              <p class="white">Order Status:  <span class="order-info">Shipped</span>  </p>
-              <?php
-                if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1) { // user is admin
-                  // Admin will be able to click on this button and change the order status of a specific order.
-                  /* Pseudo code
-                    1. connect to mysql
-
-                    2. construct update query
-                      $updateQuery = "UPDATE `orders` SET orderStatus= [opposite of current order status] WHERE orderID=[a particular orderID]";
-                    3. Run update query on database
-
-                    $result = $mysqli->query($updateQuery);
-                  */
-
-                  print ("<form method='post' action='./orders.php'>
-                            <input type='submit' value='Toggle Order Status' />
-                          </form>");
-                } 
-              ?>
-            </div>
-            <p class="white">Ordered Placed On:  <span class="order-info">2/24/2016</span> </p>
-            <p class="white">Ship to:  <span class="order-info">123 Garden Street, Oakland, CA</span> </p>
-          </div>
-          <table class='table-borders'>
-            <tr class='table-borders'>
-              <th class="white table-borders">Item</th>
-              <th class="white table-borders">Qty. Ordered</th>
-              <th class="white table-borders">Revenue</th>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's Exclusive Jeans</td>
-              <td class="white table-borders">1</td>
-              <td class="white table-borders">$40</td>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's Exclusive Shirt</td>
-              <td class="white table-borders">1</td>
-              <td class="white table-borders">$30</td>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's ...</td>
-              <td class="white table-borders">...</td>
-              <td class="white table-borders">...</td>
-            </tr>
-            <tr>
-              <td class="white" colspan="3">There may be additional items in this order not associated with this vendor.</td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="order">
-          <div class="order-details">
-            <p class="white">OrderID: <span class="order-info">XYS12432</span> </p>
-            <div class='flex-row'>
-              <p class="white">Order Status:  <span class="order-info">Not Shipped</span> </p>
-              <?php
-                if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 1) { // user is admin
-                  // Admin will be able to click on this button and change the order status of a specific order.
-                  /* Pseudo code
-                    1. connect to mysql
-
-                    2. construct update query
-                      $updateQuery = "UPDATE `orders` SET orderStatus= [opposite of current order status] WHERE orderID=[a particular orderID]";
-                    3. Run update query on database
-
-                    $result = $mysqli->query($updateQuery);
-                  */
-
-                  print ("<form method='post' action='./orders.php'>
-                            <input type='submit' value='Toggle Order Status' />
-                          </form>");
-                } 
-              ?>
-            </div>
-            <p class="white">Order Placed On: <span class="order-info">3/13/2016</span>></p>
-            <p class="white">Ship to: <span class="order-info">102 B Baker Street, London, UK</span></p>
-          </div>
-          <table class='table-borders'>
-            <tr class='table-borders'>
-              <th class="white table-borders">Item</th>
-              <th class="white table-borders">Qty. Ordered</th>
-              <th class="white table-borders">Revenue</th>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's Exclusive Jeans</td>
-              <td class="white table-borders">1</td>
-              <td class="white table-borders">$40</td>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's Exclusive Shirt</td>
-              <td class="white table-borders">1</td>
-              <td class="white table-borders">$30</td>
-            </tr>
-            <tr>
-              <td class="white table-borders">Vendor X's ...</td>
-              <td class="white table-borders">...</td>
-              <td class="white table-borders">...</td>
-            </tr>
-            <tr>
-              <td class="white" colspan="3">There may be additional items in this order not associated with this vendor.</td>
-            </tr>
-          </table>
-        </div>
-
-        <div>
-          <p class="white">...</p>
-        </div>
         
-      </div>
-
+		</div>
+		
       <div class="footer">
         <?php include "../includes/footer.php"; ?>
       </div>
