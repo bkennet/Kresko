@@ -21,6 +21,11 @@
 			  $isadmin = 0;
 			  if ($_SESSION['logged_usertype'] == 1){
 				 $isadmin = 1;
+				 if (isset($_POST['orderid']) && isset($_POST['orderstatus'])){
+					 $status = $_POST['orderstatus'] == 1 ? 0 : 1;
+					$updateQuery = "UPDATE `orders` SET status = {$status} WHERE orderID={$_POST['orderid']}";
+					$result = $mysqli->query($updateQuery);
+				 }
 			  }
 			$query = isuservendor($_SESSION['logged_userid']);
 			
@@ -63,6 +68,7 @@
 									  print ("<form method='post' action='./orders.php'>
 												<input type='hidden' name='orderid' value='{$row['orderid']}'>
 												<input type='hidden' name='orderstatus' value='{$row['status']}'>
+												<br><br>
 												<input type='submit' value='Toggle Order Status' />
 											  </form>");
 									} 
@@ -87,6 +93,7 @@
 									print("<tr><td class='white' colspan='3'>No items associated with this order!</td></tr>");
 								}
 								else {
+									//only display items if associated with logged in vendor - right now displays everything
 									while ($row2 = $result2->fetch_assoc()) {
 										$revenue = $row2['price'] * $row2['quantity'];
 										print("

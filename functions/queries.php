@@ -41,6 +41,10 @@
 		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid';";
 		return $query;
 	}
+	/* return all items associated with current vendor AND order */
+	function getvendororderitems ($orderid, $userid){
+		//to be implemented later
+	}
 
 
 	/* Used in category.php */
