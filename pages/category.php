@@ -3,6 +3,7 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+    <?php include "../functions/queries.php"; ?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
@@ -10,18 +11,22 @@
       <?php include "../includes/navigation.php"; ?>
 
         <?php 
-          /* 
-          Category page pseudo-code: 
-          $mysql = connection(db, host, username, password);
+           
+          require_once '../config.php';
+          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+          if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // then vendor is logged in
+            $ID = $_GET['vendorID']; 
+            $query = "SELECT * FROM `items` WHERE items.vendorID = $ID";
+            $query = getVendorItems($ID); 
+          } else {
+            $ID = $_GET['categoryID']; // is either a number (1-7) or 'clothing' or 'accessories';
+            $query = getCategoryItems($ID);
+          }
+
+          $result = $mysqli->query($query);
           
-          $query;
-          "query is generated based on the categoryID parameter set that will be set in the url"
-
-          $result = $mysqli->fetch(query);
-          $rows = $result->fetch_assoc();
-
-
-          */
+          
         ?>
         <div id="sort">
 
@@ -45,82 +50,21 @@
       <div class="gallery">
 
         <?php
-          /*
-            for(rows as row) {
-              print(
-                
-                [INSERT HTML FOR EACH ITEM FETCHED FROM DB]
-
-              )
+          
+            while ($row = $result->fetch_assoc()) {
+              print("<a href='items.php?itemID={$row['itemid']}'>
+                      <div>
+                        <img src='../images/pants/{$row['filepath']}' alt='Item Image'>
+                        <div class='gridinfo'>
+                          <h1>{$row['itemname']}</h1>
+                          <h2>{$row['vendorname']}</h2>
+                          <h2 class='catprice'>\${$row['price']}</h2>
+                        </div>
+                      </div>
+                    </a>");
             }  
-          */
+          
          ?>
-       
-        <a href="items.php?id=">
-          <div>
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Original 874 Work Pant</h1>
-              <h2>Dickies</h2>
-              <h2 class="catprice">$62.00</h2>
-            </div>
-          </div>
-        </a>
-
-        <a href="items.php?id=">
-          <div>
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Cool 18 Hidden Expandable-Waist Plain-Front Pant</h1>
-              <h2>Haggar</h2>
-              <h2 class="catprice">$25.00</h2>
-            </div>
-          </div>
-        </a>
-
-        <a href="items.php?id=">
-          <div>
-
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Total Freedom Relaxed Classic Fit Flat Front Pant</h1>
-              <h2>Lee</h2>
-              <h2 class="catprice">$21.33</h2>
-            </div>
-         </div>
-        </a>
-
-        <a href="items.php?id=">
-          <div>
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Slim-Tapered Flat-Front Casual Pants</h1>
-              <h2>Match</h2>
-              <h2 class="catprice">$17.99</h2>
-            </div>
-          </div>
-        </a>
-        <a href="items.php?id=">
-          <div>
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Running Trousers</h1>
-              <h2>Hemoon</h2>
-              <h2 class="catprice">14.98</h2>
-            </div>
-          </div>
-        </a>
-
-        <a href="items.php?id=">
-          <div>
-            <img src="../images/pants/pants1.jpg">
-            <div class="gridinfo">
-              <h1>Slim Tapered Stretchy Casual Pant #8050</h1>
-              <h2>Match</h2>
-              <h2 class="catprice">$15.99</h2>
-            </div>
-          </div>
-        </a>
       
       </div>
 

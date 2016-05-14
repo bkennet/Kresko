@@ -3,6 +3,7 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+    <?php include "../config.php";?> 
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->

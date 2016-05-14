@@ -1,5 +1,6 @@
 <?php 
 	/* All functions that get data from the database exist here. */
+
 	function getallorders(){
 		$query = "SELECT * FROM orders";
 		return $query;
@@ -40,5 +41,29 @@
 		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid';"
 		return $query;
 	}
-	
+
+
+	/* Used in category.php */
+
+	function getVendorItems($vendorID) {
+		return "SELECT * FROM `items` 
+			INNER JOIN `vendors` ON 
+			vendors.vendorid = items.vendorid
+			WHERE items.vendorid = $vendorID";
+	}
+
+	function getCategoryItems($categoryID) { 
+		if (is_numeric($categoryID)) {
+			return "SELECT * FROM `items` 
+					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
+					WHERE items.catid = $categoryID";
+		} else {
+			return "SELECT * FROM `items` 
+				INNER JOIN `categories` ON categories.catid = items.catid 
+				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
+				WHERE categories.category = '$categoryID'";
+		}
+	}	
+
+	/********/
 ?>
