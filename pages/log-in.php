@@ -3,6 +3,12 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+    <?php include "../config.php";?> <!-- This is the file that has our server's database credentials
+
+    <! Matt's personal local config files 
+    <?php //include "../local-config.php"; ?>
+    <?php //include "../local-connection.php"; ?>-->
+
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->

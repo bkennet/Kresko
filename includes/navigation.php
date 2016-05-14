@@ -23,9 +23,13 @@
     <div class="col-md-4">
       <a href ="profile.php">PROFILE</a>
     </div>
-    <div class="col-md-4">
-      <a href ="../pages/category.php">ITEMS</a>
-    </div>
+    <?php
+    $vendorID = $_SESSION['logged_userid'];
+    print( 
+    "<div class='col-md-4'>
+      <a href =\"../pages/category.php?vendorID=$vendorID\">ITEMS</a>
+    </div>");
+    ?>
     <div class="col-md-4">
       <a href ="../pages/orders.php">ORDERS</a>
     </div>
@@ -49,20 +53,20 @@
       <a href="artisans.php">ARTISANS</a>
     </div>
     <div class="col-md-4 dropdown">
-      <a href ="../pages/category.php?id=clothing">CLOTHING</a>
+      <a href ="../pages/category.php?categoryID=clothing">CLOTHING</a>
         <div class="dropdown-content">
-          <a href="../pages/category.php?id=shirts">Shirts</a>
-          <a href="../pages/category.php?id=sweaters">Sweaters</a>
-          <a href="../pages/category.php?id=shorts">Shorts</a>
-          <a href="../pages/category.php?id=pants">Pants</a>
-          <a href="../pages/category.php?id=shoes">Shoes</a>
+          <a href="../pages/category.php?categoryID=3">Shirts</a>
+          <a href="../pages/category.php?categoryID=4">Sweaters</a>
+          <a href="../pages/category.php?categoryID=5">Shorts</a>
+          <a href="../pages/category.php?categoryID=6">Pants</a>
+          <a href="../pages/category.php?categoryID=7">Shoes</a>
         </div>
     </div>
     <div class="col-md-4 dropdown">
-      <a href ="../pages/category.php?id=accessories">ACCESSORIES</a>
+      <a href ="../pages/category.php?categoryID=accessories">ACCESSORIES</a>
         <div class="dropdown-content">
-          <a href="../pages/category.php?id=jewelry">Jewelry</a>
-          <a href="../pages/category.php?id=bags">Bags</a>
+          <a href="../pages/category.php?categoryID=1">Jewelry</a>
+          <a href="../pages/category.php?categoryID=2">Bags</a>
         </div>
     </div>
   </div>

@@ -10,18 +10,29 @@
       <?php include "../includes/navigation.php"; ?>
 
         <?php 
-          /* 
-          Category page pseudo-code: 
-          $mysql = connection(db, host, username, password);
+           
+          // require_once '../config.php';
+          // $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+          if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // then vendor is logged in
+            $ID = $_GET['vendorID']; 
+          } else {
+            $ID = $_GET['categoryID']; // is either a number (1-7) or 'clothing' or 'accessories';
+          }
+
+          echo "<p>$ID</p>";
           
-          $query;
-          "query is generated based on the categoryID parameter set that will be set in the url"
+          // parameter set in url on this page should be a vendorID id user is logged in as a vendor
+          // and parameter should be a categoryID if user is logged in as a customer (admin can't see this page).
 
-          $result = $mysqli->fetch(query);
-          $rows = $result->fetch_assoc();
+          //$query;
+          //"query is generated based on the categoryID parameter set that will be set in the url"
+
+          //$result = $mysqli->fetch(query);
+          //$rows = $result->fetch_assoc();
 
 
-          */
+          
         ?>
         <div id="sort">
 
