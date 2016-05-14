@@ -67,7 +67,17 @@
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$categoryID'";
 		}
-	}	
+	}
+
+	// Used in items.php
+
+	function getSelectItem($itemID){
+		if (is_numeric($itemID)){
+			return "SELECT * FROM `items` 
+					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
+					WHERE items.itemid = $itemID";
+		}
+	}
 
 	/********/
 ?>
