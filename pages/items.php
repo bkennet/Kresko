@@ -28,6 +28,11 @@
 	-->
     <div class="itemdesc">
       <h1 id="name">Name</h1>
+      <?php 
+        if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
+          print("<button id='delete-item-button' type='button'>Delete this item</button>");
+        }
+      ?>
 	 <!-- Editable if user is logged in as vendor associated with this item 
 	 (display editable field instead of h1 tag))
 	 -->
