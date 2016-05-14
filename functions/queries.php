@@ -8,7 +8,7 @@
 	
 	/* to be used only if customer login is implemented*/
 	function getordersfromuser($userid){
-		$query = "SELECT * FROM orders WHERE userid = '$userid';"
+		$query = "SELECT * FROM orders WHERE userid = '$userid';";
 		return $query;
 	}
 	/* query to see if user is a vendor - returns list of vendors associated with user */
@@ -38,7 +38,7 @@
 	assumes orderid is valid*/
 	function getorderitems ($orderid){
 		$query = "SELECT items.itemid, items.itemname, items.description, itemsinorders.price, itemsinorders.quantity, items.filepath, categories.category, categories.subcategory
-		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid';"
+		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid';";
 		return $query;
 	}
 
