@@ -67,7 +67,49 @@
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$categoryID'";
 		}
-	}	
+	}
 
+	// Used in items.php
+
+	function getSelectItem($itemID){
+		if (is_numeric($itemID)){
+			return "SELECT * FROM `items` 
+					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
+					WHERE items.itemid = $itemID";
+		}
+	}
+//cart in session just maps item IDs to quantity. Bag ultimately pulls info from database
+	function addtocart($itemid, $qty){
+		if (isset($_SESSION['cart'])){
+			$cart = $_SESSION['cart'];
+			
+			if (!$cart[$itemid]){
+				$cart[$itemid] = $qty;
+			}
+			else{
+				$cart[$itemid] += $qty;
+			}
+		}
+		else{
+			$cart = array(
+				$itemid => $qty
+			);
+			$_SESSION['cart'] = $cart;
+		}
+	}
+	function removefromcart($itemid){
+		if (isset($_SESSION['cart'])){
+			//we don't know if itemid is in cart
+			if (isset($_SESSION['cart'][$itemid])){
+				unset($_SESSION['cart'][$itemid]);
+			}
+		}
+	}
+	//get item info from db
+	function getiteminfo ($itemid){
+		$query = "SELECT * from items WHERE items.itemid = $itemid;
+		";
+		return $query;
+	}
 	/********/
 ?>

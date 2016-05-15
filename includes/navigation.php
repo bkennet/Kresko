@@ -24,10 +24,9 @@
       <a href ="profile.php">PROFILE</a>
     </div>
     <?php
-    $vendorID = $_SESSION['logged_userid'];
     print( 
     "<div class='col-md-4'>
-      <a href =\"../pages/category.php?vendorID=$vendorID\">ITEMS</a>
+      <a href='../pages/category.php'>ITEMS</a>
     </div>");
     ?>
     <div class="col-md-4">

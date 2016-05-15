@@ -2,12 +2,31 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+	<?php include "../functions/queries.php"; ?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
-     <?php include "../includes/navigation.php"; ?>
-
+     <?php 
+		include "../includes/navigation.php"; 
+		require_once '../config.php';
+        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		/**
+		1. Check to see if post variables are there, process addition to session
+		**/
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			if (isset ($_POST['remove']) && isset($_POST['itemID'])){
+				removefromcart($_POST['itemID']);
+			}
+			else if (isset ($_POST['itemID']) && isset ($_POST['quantity'])){
+				addtocart($_POST['itemid'], $_POST['quantity']);
+			}
+		}
+	
+		/**
+		2. After session is processed, display cart info below
+		**/
+	?>
      <div class="bagcontent">
 
      	<div class="selection"> <!-- This is where the user's shopping cart will display the items they selected -->
@@ -20,6 +39,29 @@
      				<td>Price</td>
      				<td>Total</td>
      			</tr>
+				
+				<?php
+					if (isset($_SESSION['cart'])){
+						$cartsession = $_SESSION['cart'];
+						foreach ($cartsession as $itemid => $itemqty){
+							$query = getiteminfo($itemid);
+							$result = $mysqli->query($updateQuery);
+							$row = $result->fetch_assoc();
+							if ($result){
+								$total = $row['price'] * $itemqty;
+								print ("
+								<tr>
+								<td>{$row['itemid']}}</td>
+								<td>{$row['itemname']}}</td>
+								<td>{$itemqty}</td>
+								<td>{$row['price']}</td>
+								<td>{$total}</td>
+								</tr>
+								");
+							}
+						}
+					}
+				?>
      		</table>
      	</div>
 
