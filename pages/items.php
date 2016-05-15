@@ -3,21 +3,37 @@
 <html>
   <head>
     <?php include "../includes/header.php"; ?>
+    <?php include "../functions/queries.php"; ?>
   </head>
   <body>
     <div class="container-fluid page-wrapper">
-    <?php include "../includes/navigation.php"; ?>
+    <?php 
+      include "../includes/navigation.php"; 
+      require_once '../config.php';
+      $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+      $ID = $_GET['itemID']; 
+      $query = getSelectItem($ID);
+      $result = $mysqli->query($query);
+      $row = $result->fetch_assoc();
+    ?>
 
     <div class="itemscontent">
 
-    <div class ="itemvendor">
-      <img src="../images/pants/pants1.jpg" alt="pants1">
-      <h1>The Avengers</h1>
-      <h2>Contact: </h2>
+      <div class ="itemvendor">
 
-    </div>
+        <?php 
+        print("
+          <img src='../images/pants/{$row['vendorfilepath']}' alt='{$row['vendorfilepath']}'>
+          <h1>{$row['vendorname']}</h1>
+          <h2>Contact: {$row['email']}</h2>");
+        ?>
 
-    <img class="itemimg" src="../images/pants/pants1.jpg" alt="pants1">
+      </div>
+
+    <?php
+    print("<img class='itemimg' src='../images/pants/{$row['filepath']}'' alt='{$row['filepath']}'");
+    ?>
 
 	<!-- This page will display the following information if the user is a guest. If session indicates
 	user is logged in and is a vendor, access database to determine whether item is associated with that vendor
@@ -27,17 +43,16 @@
 	
 	-->
     <div class="itemdesc">
-      <h1 id="name">Name</h1>
-      <?php 
-        if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
-          print("<button id='delete-item-button' type='button'>Delete this item</button>");
-        }
+    <form method="post" action="../bag.php" id="addtocart">
+      <?php
+      print("<h1 id='name'>{$row['itemname']}</h1>
+            <h1 id='price'>$ {$row['price']}</h1>
+            <h2>{$row['vendorname']}</h2>");
+
       ?>
 	 <!-- Editable if user is logged in as vendor associated with this item 
 	 (display editable field instead of h1 tag))
 	 -->
-      <h1 id="price">$50.00</h1>
-      <h2>Vendor</h2>
 
       <h2>quantity:
         <select name="quantity">
@@ -55,11 +70,13 @@
       </h2>
 		<!-- Editable if user is logged in user associated with this item (display editable textarea instead of h3 tag)-->
 		
-      <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+      <?php
+        print("<h3>{$row['itemdescription']}</h3>");
+      ?>
 
 	  <!-- Plan for cart is currently to add to paypal cart, to be implemented later -->
-      <form method="get" id="addtocart">
-        <button class="button">Add to cart</button>
+        <input type="hidden" name='itemID' value=<?php echo $ID;?> />
+        <input type='submit' class='button' value="Add to Cart" />
       </form>
 
     </div>
