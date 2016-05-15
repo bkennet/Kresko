@@ -4,3 +4,4 @@
 #local config file & db connection file
 local-config.php
 local-connection.php
+config.php
