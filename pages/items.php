@@ -24,7 +24,7 @@
 
         <?php 
         print("
-          <img src='../images/pants/{$row['vendorsfilepath']}' alt='{$row['vendorsfilepath']}'>
+          <img src='../images/pants/{$row['vendorfilepath']}' alt='{$row['vendorfilepath']}'>
           <h1>{$row['vendorname']}</h1>
           <h2>Contact: {$row['email']}</h2>");
         ?>
@@ -32,7 +32,7 @@
       </div>
 
     <?php
-    print("<img class='itemimg' src='../images/pants/{$row['itemsfilepath']}'' alt='{$row['items.filepath']}'");
+    print("<img class='itemimg' src='../images/pants/{$row['itemfilepath']}'' alt='{$row['itemfilepath']}'");
     ?>
 
 	<!-- This page will display the following information if the user is a guest. If session indicates
@@ -71,7 +71,7 @@
 		<!-- Editable if user is logged in user associated with this item (display editable textarea instead of h3 tag)-->
 		
       <?php
-        print("<h3>{$row['description']}</h3>");
+        print("<h3>{$row['itemdescription']}</h3>");
       ?>
 
 	  <!-- Plan for cart is currently to add to paypal cart, to be implemented later -->

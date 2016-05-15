@@ -73,7 +73,8 @@
 
 	function getSelectItem($itemID){
 		if (is_numeric($itemID)){
-			return "SELECT * FROM `items` 
+			return "SELECT vendors.filepath AS `vendorfilepath`, vendorname, email, items.filepath AS 'itemfilepath', itemname, price, items.description AS 'itemdescription'
+					 FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.itemid = $itemID";
 		}
