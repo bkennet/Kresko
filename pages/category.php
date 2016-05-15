@@ -56,7 +56,7 @@
             while ($row = $result->fetch_assoc()) {
               print("<a href='items.php?itemID={$row['itemid']}'>
                       <div>
-                        <img src='../images/{$row['filepath']}' alt='Item Image'>
+                        <img src='../images/{$row['itemfilepath']}' alt='Item Image'>
                         <div class='gridinfo'>
                           <h1>{$row['itemname']}</h1>
                           <h2>{$row['vendorname']}</h2>
