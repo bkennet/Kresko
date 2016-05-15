@@ -92,7 +92,7 @@
 		}
 		else{
 			$cart = array(
-				$itemid: => $qty
+				$itemid => $qty
 			);
 			$_SESSION['cart'] = $cart;
 		}
@@ -101,7 +101,7 @@
 		if (isset($_SESSION['cart'])){
 			//we don't know if itemid is in cart
 			if (isset($_SESSION['cart'][$itemid])){
-				unset($_SESSION['cart'][$itemid])
+				unset($_SESSION['cart'][$itemid]);
 			}
 		}
 	}
