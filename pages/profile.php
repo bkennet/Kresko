@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src = "../includes/validate.js"></script>
     <?php include "../includes/header.php"; ?>
+    <?php include "../config.php";?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
@@ -12,23 +14,72 @@
       <?php include "../includes/navigation.php"; ?>
 
       <div class="content">
-        <div class="vendor-edit">
-          <img class="vendor-image" src="#" alt="artisan-image"/>
-    		  <form action="./profile.php" method="post" id='save-profile'>
-              <div class='vendor-info'>
-    			     <!-- Name pulled from database, userid, usertype and username are all thats stored in session.-->
-                <h3 class="white">Artisan Name</h3>
-    			     <!-- Profile information viewable below, edit submission not functional yet. This displays name, description and image from the database-->
-    			     <textarea rows='4' class="edit-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea><br>
-    			     <span class='white'>Modify vendor image:</span> <input class="white" id="new-photo" type="file" name="newphoto"><br><br>
-              </div>
-    			     <!-- Button to submit changes to vendor photo and description. Name of vendor not editable. This is all the vendor should need to edit.
-    			-->
-    			     <input type="submit" name="edit_profile" value="Save changes" >	
-    			
-    			</form>
+        <?php
+          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+          if ($mysqli->errno) {
+            print($mysqli->error);
+            exit();
+          }
+          /*$username = $_SESSION['logged_user'];
+          $query = "SELECT vendorname, description, filepath FROM vendors WHERE vendorname='barvaleather'";
+          echo($query);
+          $result = $mysqli->query($query);
+          echo($result);
+          if ($result && $result->num_rows == 1) {
+            echo("<p>Success!</p>");
+          }
+          $mysqli->close();*/
+          if (isset($_GET['vendorID'])&& ($_SESSION['logged_usertype']!=2)) {
+            $id = $_GET['vendorID'];
+            $query="SELECT vendorname, description, filepath FROM vendors where vendorid=$id";
+            $result=$mysqli->query($query);
+            while ($row = $result->fetch_assoc()) {
+              print("<div class='content-artisans'>
+                <div class='vendor'>
+                    <img class='vendor-image' src={$row['filepath']} alt='artisan-image'/>
+                      <div class='vendor-info'>
+                      <h3 class='white'>{$row['vendorname']}</h3>
+                      <p class='white'>{$row['description']}</p>
+                      </div>
+                      </div>
+                      </div>");
+            }
+          } else { ?>
+            <div class="vendor-edit">
+          <?php
+            $username = $_SESSION['logged_user'];
+            $query="SELECT vendorname, description, filepath FROM vendors WHERE vendorname='$username'";
+            $result=$mysqli->query($query);
+            while ($row = $result->fetch_assoc()) {
+              print("<img class='vendor-image' src='{$row['filepath']}' alt='artisan-image'/>
+                    <form onsubmit='return validateEditVendor(this);' action='profile.php' method='post' id='save-profile' enctype='multipart/form-data'>
+                    <div class='vendor-info'>
+                    <h3 class='white'>{$row['vendorname']}</h3>
+                    <textarea rows='4' class='edit-description' name='descriptionedit'>{$row['description']}</textarea><br>
+                    <span class='white'>Modify vendor image:</span> <input class='white' type='file' name='newphoto'><br><br>
+                    </div>
+                    <input type='submit' name='edit_profile' value='Save Changes'>
+                    </form>");
+            }
+          }
+        ?>
         </div> 
       </div>
+      <?php
+        if (isset($_POST['edit_profile'])) {
+          $query="UPDATE vendors SET description='{$_POST['descriptionedit']}' WHERE vendorname='$username'";
+          $mysqli->query($query);
+          if (!empty($_FILES['newphoto'])) {
+            $newfile=$_FILES['newphoto'];
+            $tempName=$newfile['tmp_name'];
+            $name=$newfile['name'];
+            $location='../images/vendors/'.$name;
+            move_uploaded_file($tempName, $location);
+            $query="UPDATE vendors SET filepath='$location' WHERE vendorname='$username'";
+            $mysqli->query($query);
+          }
+        }
+      ?>
       
 
       <div class="footer">

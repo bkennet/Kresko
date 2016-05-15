@@ -79,6 +79,13 @@ p #brand {
 	text-decoration: none;
 }
 
+.artisan {
+	width: 30%;
+	margin-right: 15%;
+	margin-bottom: 30px;
+	float: right;
+}
+
 #homepicture {
 	position: absolute;
 	width: 100%;
