@@ -20,15 +20,6 @@
             print($mysqli->error);
             exit();
           }
-          /*$username = $_SESSION['logged_user'];
-          $query = "SELECT vendorname, description, filepath FROM vendors WHERE vendorname='barvaleather'";
-          echo($query);
-          $result = $mysqli->query($query);
-          echo($result);
-          if ($result && $result->num_rows == 1) {
-            echo("<p>Success!</p>");
-          }
-          $mysqli->close();*/
           if (isset($_GET['vendorID'])&& ($_SESSION['logged_usertype']!=2)) {
             $id = $_GET['vendorID'];
             $query="SELECT vendorname, description, filepath FROM vendors where vendorid=$id";
