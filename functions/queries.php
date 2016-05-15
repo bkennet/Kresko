@@ -85,10 +85,10 @@
 			$cart = $_SESSION['cart'];
 			
 			if (!$cart[$itemid]){
-				$cart[$itemid] = $qty;
+				$_SESSION['cart'][$itemid] = $qty;
 			}
 			else{
-				$cart[$itemid] += $qty;
+				$_SESSION['cart'][$itemid] = $_SESSION['cart'][$itemid] + $qty;
 			}
 		}
 		else{
