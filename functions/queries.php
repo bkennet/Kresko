@@ -58,11 +58,11 @@
 
 	function getCategoryItems($categoryID) { 
 		if (is_numeric($categoryID)) {
-			return "SELECT * FROM `items` 
+			return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.catid = $categoryID";
 		} else {
-			return "SELECT * FROM `items` 
+			return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price  FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$categoryID'";
