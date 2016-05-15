@@ -26,10 +26,10 @@
           }
 
           $result = $mysqli->query($query);
-          
-          
+             
         ?>
         <div id="sort">
+
 
           <h1>Category/Vendor Name</h1>
           <span class='white'>Sort by:</span>
