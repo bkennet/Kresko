@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,14 +16,15 @@
 		1. Check to see if post variables are there, process addition to session
 		**/
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			print("SERVER REQUEST SENT ITEMS TO ADD TO CART");
 			if (isset ($_POST['remove']) && isset($_POST['itemID'])){
 				removefromcart($_POST['itemID']);
+				print("Remove from cart");
 			}
 			else if (isset ($_POST['itemID']) && isset ($_POST['quantity'])){
-				addtocart($_POST['itemid'], $_POST['quantity']);
+				addtocart($_POST['itemID'], $_POST['quantity']);
 			}
 		}
-	
 		/**
 		2. After session is processed, display cart info below
 		**/
@@ -45,14 +47,14 @@
 						$cartsession = $_SESSION['cart'];
 						foreach ($cartsession as $itemid => $itemqty){
 							$query = getiteminfo($itemid);
-							$result = $mysqli->query($updateQuery);
+							$result = $mysqli->query($query);
 							$row = $result->fetch_assoc();
 							if ($result){
 								$total = $row['price'] * $itemqty;
 								print ("
 								<tr>
-								<td>{$row['itemid']}}</td>
-								<td>{$row['itemname']}}</td>
+								<td>{$row['itemid']}</td>
+								<td>{$row['itemname']}</td>
 								<td>{$itemqty}</td>
 								<td>{$row['price']}</td>
 								<td>{$total}</td>
@@ -60,6 +62,9 @@
 								");
 							}
 						}
+					}
+					else{
+						print("<tr><td>No items in cart!</td></tr>");
 					}
 				?>
      		</table>
