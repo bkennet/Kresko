@@ -670,6 +670,26 @@ ul {
 	border-bottom: 1px solid black;
 }
 
+.content-checkout {
+	display: flex;
+	justify-content: center;
+	min-height: 400px;
+}
+
+.checkout-email {
+	display: flex;
+	flex-direction: column;
+}
+
+.checkout-submit {
+	margin-bottom: 30px;
+	width: 50%;
+}
+
+.green {
+	color: green;
+}
+
 #divider {
 	border-right: 1px solid white;
 	width:0;

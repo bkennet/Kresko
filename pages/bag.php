@@ -12,9 +12,9 @@
 		include "../includes/navigation.php"; 
 		require_once '../config.php';
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-		/**
+		/*
 		1. Check to see if post variables are there, process addition to session
-		**/
+		*/
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			print("SERVER REQUEST SENT ITEMS TO ADD TO CART");
 			if (isset ($_POST['remove']) && isset($_POST['itemID'])){
@@ -25,9 +25,9 @@
 				addtocart($_POST['itemID'], $_POST['quantity']);
 			}
 		}
-		/**
+		/*
 		2. After session is processed, display cart info below
-		**/
+		*/
 	?>
      <div class="bagcontent">
 
@@ -84,7 +84,7 @@
      		
      		<p id="total"> TOTAL: </p>
 
-     		<form method="get" id="placeorder"> <!-- This button will bring the user to an external payment site such as PayPal -->
+     		<form method="get" action="./checkout.php" id="placeorder"> <!-- This button will bring the user to an external payment site such as PayPal -->
         		<button class="button">PLACE ORDER</button>
       		</form>
 
