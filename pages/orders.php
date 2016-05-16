@@ -42,7 +42,7 @@
 					exit();
 				}
 				if ($result->num_rows == 0){
-					print("No orders associated with this vendor!");
+					print("<p class='white'>No orders associated with this vendor!<p>");
 				}
 				else {
 					while ($row = $result->fetch_assoc()) {

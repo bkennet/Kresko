@@ -9,27 +9,27 @@
 		if (is_numeric($ID)) {
 
 			if ($sorttype == "relevance"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.catid = $ID");
 			}
 
 			elseif ($sorttype == "pricehigh"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.catid = $ID
 					ORDER BY price DESC");
 			}
 
 			elseif ($sorttype == "pricelow"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.catid = $ID
 					ORDER BY price ASC");
 			}
 
 			elseif ($sorttype == "alphabetical"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
 					WHERE items.catid = $ID
 					ORDER BY itemname ASC");
@@ -38,14 +38,14 @@
 		} else {
 
 			if ($sorttype == "relevance"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$ID'");
 			}
 
 			elseif ($sorttype == "pricehigh"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$ID'
@@ -53,7 +53,7 @@
 			}
 
 			elseif ($sorttype == "pricelow"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$ID'
@@ -61,7 +61,7 @@
 			}
 
 			elseif ($sorttype == "alphabetical"){
-				$query = ("SELECT * FROM `items` 
+				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
 				INNER JOIN `vendors` ON items.vendorid = vendors.vendorid 
 				WHERE categories.category = '$ID'
