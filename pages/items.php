@@ -43,7 +43,7 @@
 	
 	-->
     <div class="itemdesc">
-    <form method="post" action="./bag.php" id="addtocart">
+    <form method="post" action="../bag.php" id="addtocart">
       <?php
       print("<h1 id='name'>{$row['itemname']}</h1>
             <h1 id='price'>$ {$row['price']}</h1>

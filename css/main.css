@@ -1,4 +1,5 @@
 /******* Place CSS Below ********/
+
 @font-face {
 	font-family: audrey;
 	src: url(../fonts/Audrey-Normal.otf);
@@ -37,7 +38,7 @@ p #brand {
 }
 
 .login a{
-	color:gray;
+	color:white;
 	display: inline;
 	padding-left: 10px;
 }
@@ -90,18 +91,34 @@ p #brand {
 	position: absolute;
 	width: 100%;
 	overflow: hidden;
-	height: 500px;
+/*	height: 500px;*/
 }
 
 .content {
-	margin-top: 375px;
-	margin-bottom: 50px;
-	margin-right: 15px;
+	margin-top: 33%;
+	margin-bottom: 8%;
+/*	margin-bottom: 50px;
+	margin-right: 15px;*/
 	height: 820px;
 	width: 100%;
-	padding-bottom: 40px;
-	padding-left: 115px;
-	padding-right: 115px;
+/*
+
+	padding-bottom: 40px;*/
+	padding-left: 8%;
+	padding-right: 8%;
+
+/*	  line-height: 0;
+   
+    -webkit-column-count: 5;
+    -webkit-column-gap: 0px;
+    -moz-column-count: 5;
+    -moz-column-gap: 0px;
+    column-count: 5;
+    column-gap: 0px;  */
+}
+
+.content a:hover{
+	opacity: .6;
 }
 
 .title a{
@@ -121,11 +138,12 @@ p #brand {
 
 #box1 {
 	height: 400px;
-	width: 540px;
+	width: 50%;
 /*	border-style: solid;
 	border-color: red;*/
 	float: left;
 	position: relative;
+
 }
 
 .promopic{
@@ -135,7 +153,7 @@ p #brand {
 
 #box2 {
 	height: 200px;
-	width: 506px;
+	width: 50%;
 /*	border-style: solid;
 	border-color: orange;*/
 	float: right;
@@ -143,7 +161,7 @@ p #brand {
 
 #box3 {
 	height: 200px;
-	width: 506px;
+	width: 50%;
 /*	border-style: solid;
 	border-color: blue;*/
 	float: right;
@@ -151,7 +169,7 @@ p #brand {
 
 #box4 {
 	height: 400px;
-	width: 270px;
+	width: 25%;
 /*	border-style: solid;
 	border-color: purple;*/
 	float: left;
@@ -159,7 +177,7 @@ p #brand {
 
 #box5 {
 	height: 400px;
-	width: 270px;
+	width: 25%;
 /*	border-style: solid;
 	border-color: green;*/
 	float: left;
@@ -167,7 +185,7 @@ p #brand {
 
 #box6 {
 	height: 400px;
-	width: 500px;
+	width: 50%;
 /*	border-style: solid;
 	border-color: yellow;*/
 	float: left;
@@ -276,7 +294,7 @@ span.success{
 	margin-right: 15px;
 	height: 820px;
 	width: 100%;
-	padding-bottom: 40px;
+	margin-bottom: 10%;
 	padding-left: 150px;
 	padding-right: 115px;
 	background-color: black;
@@ -311,15 +329,15 @@ span.success{
 
 .itemimg {
 	border-style: solid;
-	height: 600px;
-	width: 450px;
+	height: 80%;
+	width: 55%;
 	}
 
 .itemdesc {
 	background-color: white;
 	opacity: .8;
-	height: 500px;
-	width: 500px;
+/*	height: 63%;*/
+	width: 40%;
 	float:right;
 	font-family: audrey;
 }
@@ -329,12 +347,18 @@ input:-webkit-autofill {
 }
 
 #addtocart {
-	margin-left: 50px;
+	margin-left: 4%;
+	margin-right: 4%;
 }
 
 .button {
-	width: 400px;
+	position: relative;
+	width: 100%;
 	transition-duration: .2s;
+	height: 40px;
+	font-size: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 .button:hover {
@@ -354,7 +378,7 @@ input:-webkit-autofill {
 
 #sort {
 	color: white;
-	text-align: right;
+/*	text-align: right;*/
 	border-bottom: 1px solid white;
 }
 
@@ -363,15 +387,21 @@ input:-webkit-autofill {
 }
 
 .gallery {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	text-align: center;
+/*	display: flex;
+	flex-wrap: wrap;*/
+/*	justify-content: center;
+	text-align: center;*/
+
+	margin-left: 8%;
+	margin-right: 8%;
+	padding-bottom: 4%;
+	overflow: hidden;
 }
 
 .gallery img{
 	width:100%;
 	height: 320px;
+
 }
 
 .gallery h1{
@@ -405,6 +435,7 @@ input:-webkit-autofill {
 	margin-left: 30px;
 	margin-right:30px;
 	text-align: center;
+
 }
 
 .gallery a:hover{
@@ -423,13 +454,13 @@ input:-webkit-autofill {
 }
 
 #sort {
-	width: 75%;
 	color: white;
-	text-align: right;
-	margin-right: 0px;
+/*	text-align: right;*/
+	margin-right: 8%;
 	border-bottom: 1px solid white;
-	margin-left: 160px;
+	margin-left: 8%;
 	margin-bottom: 30px;
+	text-align: right;
 }
 
 /* For artisans page */
@@ -472,7 +503,7 @@ input:-webkit-autofill {
 }
 
 .center {
-	text-align: center
+	text-align: center;
 }
 
 
@@ -593,11 +624,38 @@ ul {
 	position: absolute; 
     background: black; 
     opacity: .7;
-    width: 100%;
-    height: 60px;
-    font-size: 2em;
+    width: 50%;
+    height: 40px;
+    font-size: 17px;
+    font-family: AUDREY;
     color: white;
+/*    text-align: */
 }
+
+.promo1{
+	position: absolute; 
+    background: black; 
+    opacity: .7;
+    width: 100%;
+    height: 40px;
+    font-size: 17px;
+    font-family: AUDREY;
+    color: white;
+
+}
+
+.promo2{
+	position: absolute; 
+    background: black; 
+    opacity: .7;
+    width: 25%;
+    height: 40px;
+    font-size: 17px;
+    font-family: AUDREY;
+    color: white;
+/*    text-align: */
+}
+
 
 .gallery .catprice {
 	color: red;

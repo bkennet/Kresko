@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 
     $.ajax({
-      url: '../functions/sort.php',
+      url: 'sort.php',
       type: 'POST',
       data: {sort: sorttype, ID: ID, type: usertype},
       dataType: 'JSON'

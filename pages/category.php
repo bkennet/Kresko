@@ -49,24 +49,25 @@
             if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
               print ("<a href='./add-item.php' class='textbig'>CREATE NEW ITEM</a>");
             } 
-          ?>  
+            ?>  
         </div>
 
-      <div class="gallery">
 
+      <div class="gallery">
+        
         <?php
             while ($row = $result->fetch_assoc()) {
-              print("<a href='items.php?itemID={$row['itemid']}'>
-                      <div>
-                        <img src='../images/{$row['itemfilepath']}' alt='Item Image'>
-                        <div class='gridinfo'>
-                          <h1>{$row['itemname']}</h1>
-                          <h2>{$row['vendorname']}</h2>
-                          <h2 class='catprice'>\${$row['price']}</h2>
+              print("<a class='col-md-3' href='items.php?itemID={$row['itemid']}'>
+                        <div>
+                          <img src='../images/{$row['itemfilepath']}' alt='Item Image'>
+                          <div class='gridinfo'>
+                            <h1>{$row['itemname']}</h1>
+                            <h2>{$row['vendorname']}</h2>
+                            <h2 class='catprice'>\${$row['price']}</h2>
+                          </div>
                         </div>
-                      </div>
-                    </a>");
-            } 
+                      </a>");
+            };
          ?>
     
       </div>
@@ -74,6 +75,7 @@
       <div class="footer">
         <?php include "../includes/footer.php"; ?>
       </div>
+
     </div>
   </body>
 </html>
