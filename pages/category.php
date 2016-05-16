@@ -33,7 +33,7 @@
         <div id="sort">
 
 
-          <h1>Category/Vendor Name</h1>
+          <h1 class='white'>Category/Vendor Name</h1>
           <span class='white'>Sort by:</span>
 
           <?php
