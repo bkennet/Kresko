@@ -129,12 +129,13 @@
 		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		//create new order
 		$query = createorderquery($address);
-		$tempresult = $mysqli2->query($query);
+		//$tempresult = $mysqli2->query($query);
 		print($query);
-		print($tempresult);
-		if( $mysqli2->query($tempresult) ) {
+		//print($tempresult);
+		if( $mysqli2->query($query) ) {
 			//get orderid of created order
 			$orderid = $mysqli2->insert_id;
+			print(var_dump($_SESSION['cart']));
 			if (isset($_SESSION['cart'])){
 				$cartsession = $_SESSION['cart'];
 				foreach ($cartsession as $itemid => $itemqty){
@@ -145,7 +146,7 @@
 						//add items to itemorders
 						$query = additemtoorderquery($itemid, $orderid, $itemprice, $itemqty);
 						$tempresult = $mysqli2->query($query);
-						$print_r($query);
+						print_r($query);
 						if (!$tempresult){
 							print ("<span class='error'><br>Problem adding an item to order! Please contact sales team at kreskosales@gmail.com.</span>");
 						}
@@ -154,13 +155,11 @@
 					else {
 						print ("<span class='error'><br>Problem adding item to order, itemID is invalid.</span>");
 					}
-					
-					
 				}
 				return $orderid;
 			}
 			else {
-				print ("<span class='error'><br>Problem creating order! Please contact sales team at kreskosales@gmail.com.</span>");
+				print ("<span class='error'><br>Problem creating order from cart! Please contact sales team at kreskosales@gmail.com.</span>");
 				return -1;
 			}
 			
