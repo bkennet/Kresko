@@ -38,7 +38,7 @@
 	assumes orderid is valid*/
 	function getorderitems ($orderid){
 		$query = "SELECT items.itemid, items.itemname, items.description, itemsinorders.price, itemsinorders.quantity, items.filepath, categories.category, categories.subcategory
-		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid';";
+		FROM itemsinorders INNER JOIN items on itemsinorders.itemid = items.itemid INNER JOIN categories on categories.catid = items.itemid WHERE orderid = '$orderid' ORDER BY description";
 		return $query;
 	}
 	/* return all items associated with current vendor AND order */
@@ -49,18 +49,18 @@
 
 	/* Used in category.php */
 
-	function getVendorItems($userID) {
-		return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price FROM `vendors` 
-			INNER JOIN `items` ON 
-			vendors.vendorid = items.vendorid AND 
-			vendors.userid = '$userID'";
+	function getVendorItems($vendorID) {
+		return "SELECT * FROM `items` 
+			INNER JOIN `vendors` ON 
+			vendors.vendorid = items.vendorid
+			WHERE items.vendorid = $vendorID";
 	}
 
 	function getCategoryItems($categoryID) { 
 		if (is_numeric($categoryID)) {
 			return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price FROM `items` 
 					INNER JOIN `vendors` ON vendors.vendorid = items.vendorid 
-					WHERE items.catid = '$categoryID'";
+					WHERE items.catid = $categoryID";
 		} else {
 			return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price  FROM `items` 
 				INNER JOIN `categories` ON categories.catid = items.catid 
@@ -121,7 +121,7 @@
 	}
 	
 	function additemtoorderquery($itemid, $orderid, $price, $quantity){
-		$query = "INSERT INTO itemsinorders (itemid, price, quantity, orderid) VALUES ('$itemid', '$orderid', '$price', '$quantity');";
+		$query = "INSERT INTO itemsinorders (itemid, price, quantity, orderid) VALUES ('$itemid', '$price', '$quantity', '$orderid');";
 		return $query;
 	}
 	/**Creates order from cart **/
@@ -140,6 +140,7 @@
 				$cartsession = $_SESSION['cart'];
 				foreach ($cartsession as $itemid => $itemqty){
 					$tempresult = $mysqli2->query(getiteminfo($itemid));
+					print_r($tempresult);
 					if ($tempresult && $tempresult->num_rows == 1){
 						$row = $tempresult->fetch_assoc();
 						$itemprice = $row['price'];
@@ -168,5 +169,67 @@
 			print ("<span class='error'>Problem creating order! Please contact sales team at kreskosales@gmail.com.</span>");
 			return -1;
 		}
+	}
+	
+	/**Retrieve items, assumes valid orderid, order actually contains items
+	function getitemsarray ($orderid){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = getorderitems($orderid);
+		$result = $mysqli2->query($query);
+		while ($row = $result->fetch_assoc()){
+			$revenue = $row2['price'] * $row2['quantity'];
+										print("
+										<tr>
+										  <td class='white table-borders'>{$row2['itemname']}</td>
+										  <td class='white table-borders'>{$row2['quantity']}</td>
+										  <td class='white table-borders'>{$revenue}</td>
+										</tr>");
+		}
+	} **/
+	/**process message sending. First, pull order info from database, then compose message, then send to both admin and user
+	Assumes orderid is valid **/
+	function processorder ($email, $orderid, $address){
+		
+    
+		
+		//get all items associated with order
+		global $error;
+		//$headers = 'From: kreskosales@gmail.com' . "\r\n" . 'Reply-To: kreskosales@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+			$headers = "From: kreskosales@gmail.com" . "\r\n";
+			$headers .= "Reply-To: kreskosales@gmail.com" . "\r\n";
+			$headers .= "CC: kreskosales+order@gmail.com\r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			/**let's make a nice email**/
+			$message = '<html><body>';
+			$message .= '<img src="//i.imgur.com/T7QfOiJ.png" alt="Kresko Order Request" /><br>';
+			$message .= "<strong>Order ID#: </strong>" . $orderid . "<br>";
+			$message .= "<strong>Email: </strong>" . $email . "<br>";
+			
+			/*retrieve address stored in database */
+			$message .= "<strong>Shipping address used: </strong>" . $address . "<br>";
+			//now generate table with item info
+			$message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+			$message .= "<tr style='background: #eee;'><td><strong>Item:</strong> </td><td><strong>Name:</strong> </td><td><strong>Quantity:</strong></td><td><strong>Price:</strong> </td><td><strong>Total:</strong> </td></tr>";
+			
+			$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+			$query = getorderitems($orderid);
+			$result = $mysqli2->query($query);
+			while ($row2 = $result->fetch_assoc()){
+				$revenue = $row2['price'] * $row2['quantity'];
+				$message .= "<tr>";
+				$message .= "<td>{$row2['itemid']}</td>";
+				$message .= "<td>{$row2['itemname']}</td>";
+				$message .= "<td>{$row2['quantity']}</td>";
+				$message .= "<td>{$row2['price']}</td>";
+				$message .= "<td>{$revenue}</td></tr>";
+			}
+			$message .= "</table>";
+			$message .= "<strong>Thank you for your purchase, {$email}! Please don't hesitate to reach out with any questions by e-mailing us at kreskosales@gmail.com.</strong>";
+			$message .= "</body></html>";
+			
+			//send message to me and to person who left feedback
+			mail ( $email, 'KRESKO - Thank you for your order', $message, $headers);
+			return $message;
 	}
 ?>
