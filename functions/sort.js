@@ -14,6 +14,7 @@ $(document).ready(function(){
       dataType: 'JSON'
     })
     .done(function(data) {
+        console.log(data);
 
         $('.gallery').html("");
 
