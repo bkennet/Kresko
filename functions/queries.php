@@ -255,7 +255,7 @@
 		$query = "INSERT INTO items (vendorid, itemname, description, price, qty_avail, catid, filepath) VALUES ('{$vendorid}', '{$name}', '{$descr}', '{$price}', '{$qty}', '{$catid}', '{$filepath}');";
 		if ($mysqli2->query($query)){
 			$newitemid = $mysqli2->insert_id;
-			print("<br>Item {$newitemid} {$name} was added successfully.");
+			//print("<br>Item {$newitemid} {$name} was added successfully.");
 			return $newitemid;
 		}
 		print("Problem adding item.");
@@ -286,5 +286,18 @@
 		$result = $mysqli2->query($query);
 		//returns positive if rows were altered
 		return $mysqli2->affected_rows;
+	}
+	
+	/**check if username already exists **/
+	function userexists($username){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "SELECT username FROM users WHERE users.username = {$username}";
+		$result = $mysqli2->query($query);
+		if ($result->num_rows == 0){
+			return 0;
+		}
+		else{
+			return 1;
+		}
 	}
 ?>

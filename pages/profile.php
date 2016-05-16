@@ -24,23 +24,7 @@
           
           // BEGIN CUSTOMER VIEW (AND) BEGIN ADMIN VIEW
           if (!(isset($_SESSION['logged_usertype'])) || (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] != 2)) {
-            /**
-						$id = $_GET['vendorID'];
-            $query="SELECT vendorname, description, filepath FROM vendors where vendorid=$id";
-            $result=$mysqli->query($query);
-            while ($row = $result->fetch_assoc()) {
-              print("
-                    <div class='content-artisans'>
-                      <div class='vendor'>
-                        <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
-                          <div class='vendor-info'>
-                            <h1 class='white'>{$row['vendorname']}</h1>
-                            <p class='white'>{$row['description']}</p>
-                          </div>
-                      </div>
-                    </div>");
-
-            } **/
+            
 						print("<h2 class='center'><span class='error'>Sorry, you are not authorized to view this page.</span></h2>");
           } 
 					else { 
@@ -55,7 +39,7 @@
           $query="UPDATE vendors SET description='$desc' WHERE userid='$userid'";
           $mysqli->query($query);
 					
-          if (isset($_FILES['newphoto']) && isset($_FILES['newphoto']) && $_FILES['newphoto']['error'] == 0) {
+          if (isset($_FILES['newphoto']) && $_FILES['newphoto']['error'] == 0) {
 							
 								$newPhoto = $_FILES['newphoto'];
 								$newname = $newPhoto['name'];
@@ -77,7 +61,7 @@
 
            
 						else {
-							print("<span class='error'><br>Error: The file was not uploaded.<br></span>" );
+							print("<h2 class='center'><span class='error'><br>No image was uploaded.<br></span></h2>" );
 						}
 					
           /**if (!empty($_FILES['newphoto'])) {
@@ -92,7 +76,7 @@
         }
       
 					
-						else {
+						
 						?>
 							<div class="vendor-edit">
 						<?php
@@ -100,6 +84,7 @@
 							$userid = $_SESSION['logged_userid'];
 							$query="SELECT vendorname, description, filepath FROM vendors WHERE userid='$userid'";
 							$result=$mysqli->query($query);
+							//if curent user corresponds to this vendor
 							if ($result->num_rows == 1){
 								while ($row = $result->fetch_assoc()) {
 									print("<img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
@@ -120,7 +105,7 @@
 							else{
 								print("<h2 class='center'><span class='error'>Sorry, you are not authorized to view this page.</span></h2>");
 							}
-						}
+						
 					}
         ?>
         </div> 

@@ -38,7 +38,7 @@
 					$qtyavail = '';
 					
 					if (isset($_POST['submit'])){
-						print("Submitted success.");
+						//print("Submitted success.");
 						//check inputs
 						$itemname = filter_input( INPUT_POST, 'itemname', FILTER_SANITIZE_STRING );
 						$safe_itemname = htmlentities( $itemname );
@@ -83,7 +83,8 @@
 									edititemimg($newitemid, $filepath);
 								} 
 								else {
-									print("<span class='error'>Error: The file $originalName was not uploaded.</span>");
+									print("<h2 class='center'><span class='error'>No image selected. Used 'perubag1.jpg' by default.</span></h2>");
+									$newitemid = additem(getvendorid($_SESSION['logged_userid']), $itemname, $itemdescription, $price, $qtyavail, $catid, 'perubag1.jpg');
 								}
 							}
 						//	print();
