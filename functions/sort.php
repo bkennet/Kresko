@@ -7,7 +7,7 @@
 	$ID = filter_input(INPUT_POST, "ID", FILTER_SANITIZE_STRING);
 	$usertype = filter_input(INPUT_POST, "type", FILTER_SANITIZE_STRING);
 
-		if ($usertype == "2") { // Vendor is looking at their items
+		if (is_numeric($ID) && $usertype == "2") { // Vendor is looking at their items
 			if ($sorttype == "relevance") {
 				$query = "SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `vendors` 
 						INNER JOIN `items` ON 
@@ -37,7 +37,7 @@
 			}
 		}
 
-		elseif (is_numeric($ID)) {
+		elseif (is_numeric($ID) && $usertype == "1") { // id is the id of a subcategory
 
 			if ($sorttype == "relevance"){
 				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 
@@ -66,7 +66,7 @@
 					ORDER BY itemname ASC");
 			}
 
-		} else {
+		} else { // ID is a supercategory (either 'clothing' or 'accessories')
 
 			if ($sorttype == "relevance"){
 				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 

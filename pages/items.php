@@ -11,8 +11,7 @@
       include "../includes/navigation.php"; 
       require_once '../config.php';
       $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-      $ID = $_GET['itemID']; 
+      $ID = $_GET['itemID'];
       $query = getSelectItem($ID);
       $result = $mysqli->query($query);
       $row = $result->fetch_assoc();
@@ -20,7 +19,7 @@
 
     <div class="itemscontent">
 
-      <div class ="itemvendor">
+      <div class="itemvendor">
 
         <?php 
         print("
@@ -32,7 +31,7 @@
       </div>
 
     <?php
-    print("<img class='itemimg' src='../images/{$row['itemfilepath']}'' alt='{$row['itemfilepath']}'");
+    print("<img class='itemimg' src='../images/{$row['itemfilepath']}' alt='{$row['itemfilepath']}'/>");
     ?>
 
 	<!-- This page will display the following information if the user is a guest. If session indicates
@@ -43,18 +42,69 @@
 	
 	-->
     <div class="itemdesc">
-    <form method="post" action="../bag.php" id="addtocart">
+    <?php
+      if (isset($_SESSION) && $_SESSION['usertype'] == 2) { // Then you are a vendor on items.php
+        print("
+                <form method='post' action='./items.php?itemID=$ID' id='addtocart' enctype='multipart/form-data'>
+                  <h1 id='name'>{$row['itemname']}</h1>
+                  <input type='text' value='\${$row['price']}' name='price'/>
+                  <h2>{$row['vendorname']}</h2>
+
+                  <textarea rows='4' name='itemdescription' class='item-description-textarea'>{$row['itemdescription']}</textarea>
+                  <span class='white'>Modify vendor image:</span> <input class='white' type='file' name='newphoto'>
+
+                  <input type='hidden' name='itemID' value=$ID />
+                  <input type='submit' class='button' value='Edit Item' />
+                </form>
+          ");
+      }
+      else { // Then you are a customer on items.php
+        
+        
+
+        print(" 
+                <form method='post' action='./bag.php' id='addtocart'>
+                  <h1 id='name'>{$row['itemname']}</h1>
+                  <h1 id='price'>\${$row['price']}</h1>
+                  <h2>{$row['vendorname']}</h2>
+                
+
+                  <h2>quantity:
+                    <select name='quantity'>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                      <option value='6'>6</option>
+                      <option value='7'>7</option>
+                      <option value='8'>8</option>
+                      <option value='9'>9</option>
+                      <option value='10'>10</option>
+                    </select>
+                  </h2>
+                  
+
+                  <h3>{$row['itemdescription']}</h3>
+
+                  <input type='hidden' name='itemID' value=$ID />
+                  <input type='submit' class='button' value='Add to Cart' />
+                </form>
+        ");
+      }
+    ?>
+    <!-- <form method="post" action="./bag.php" id="addtocart"> -->
       <?php
-      print("<h1 id='name'>{$row['itemname']}</h1>
-            <h1 id='price'>$ {$row['price']}</h1>
-            <h2>{$row['vendorname']}</h2>");
+      // print("<h1 id='name'>{$row['itemname']}</h1>
+      //       <h1 id='price'>$ {$row['price']}</h1>
+      //       <h2>{$row['vendorname']}</h2>");
 
       ?>
 	 <!-- Editable if user is logged in as vendor associated with this item 
 	 (display editable field instead of h1 tag))
 	 -->
 
-      <h2>quantity:
+      <!-- <h2>quantity:
         <select name="quantity">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -67,21 +117,30 @@
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
-      </h2>
+      </h2> -->
 		<!-- Editable if user is logged in user associated with this item (display editable textarea instead of h3 tag)-->
 		
       <?php
-        print("<h3>{$row['itemdescription']}</h3>");
+        // print("<h3>{$row['itemdescription']}</h3>");
       ?>
 
 	  <!-- Plan for cart is currently to add to paypal cart, to be implemented later -->
-        <input type="hidden" name='itemID' value=<?php echo $ID;?> />
+        <!-- <input type="hidden" name='itemID' value=<?php //echo $ID;?> />
         <input type='submit' class='button' value="Add to Cart" />
-      </form>
+      </form> -->
 
-    </div>
+      <?php
+        // if (isset($_POST['item-deleted'])) {
+        //   $mysqli->query("DELETE FROM `items` WHERE items.itemid = $ID;");
+        //   print ("<p>This item was deleted succesfully. Please navigate back to categories to your items to view your change.</p>");
+        // } 
+      ?>
 
-    </div>
+
+
+    </div> <!-- end div itemdesc -->
+
+    </div> <!-- end div itemscontent -->
 
     <div class="footer">
       <?php include "../includes/footer.php"; ?>

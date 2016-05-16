@@ -8,12 +8,13 @@ $(document).ready(function(){
 
 
     $.ajax({
-      url: 'sort.php',
+      url: '../functions/sort.php',
       type: 'POST',
       data: {sort: sorttype, ID: ID, type: usertype},
       dataType: 'JSON'
     })
     .done(function(data) {
+        console.log(data);
 
         $('.gallery').html("");
 
