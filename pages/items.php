@@ -11,17 +11,46 @@
       include "../includes/navigation.php"; 
       require_once '../config.php';
       $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-      $ID = $_GET['itemID'];
-      $query = getSelectItem($ID);
-      $result = $mysqli->query($query);
-      $row = $result->fetch_assoc();
+      if (!isset($_GET['itemID'])){
+				print("<span class='error'>You are here by mistake!</span>");
+			}
+			else if (!ctype_digit($_GET['itemID'])){
+				print("This image doesn't exist!");
+			}
+			//at least input is a number
+			else {
+				$imageID = $_GET['itemID'];
+				$ID = $_GET['itemID'];
+				$query = getSelectItem($ID);
+				$result = $mysqli->query($query);
+				//If no result, print the error
+				if (!$result) {
+					print("Error: <span class='error'>" . $mysqli->error . "</span>");
+					exit();
+				}
+				if ($result->num_rows != 1){
+					print("<span class='error'>This image doesn't exist!</span>");
+				}
+				//itemid is valid
+				else {
+					$row = $result->fetch_assoc();
+					$isvalidvendor = false;
+					if (isset ($_SESSION['logged_userid']) && $_SESSION['logged_usertype'] == 2){
+						$vendorid = getvendorid($_SESSION['logged_userid']);
+						//vendor of item matches user logged in
+						if ($vendorid = getvendorofitem($ID)){
+							$isvalidvendor = true;
+						}
+					}
+					
     ?>
 
     <div class="itemscontent">
 
       <div class="itemvendor">
-
+				
         <?php 
+				
         print("
           <img src='../images/{$row['vendorfilepath']}' alt='{$row['vendorfilepath']}'>
           <h1>{$row['vendorname']}</h1>
@@ -31,7 +60,47 @@
       </div>
 
     <?php
-    print("<img class='itemimg' src='../images/{$row['itemfilepath']}' alt='{$row['itemfilepath']}'/>");
+		//request to edit was submitted via post. now let's validate
+			if (isset($_POST['edititem']) && $isvalidvendor){
+				$itemdescription = filter_input( INPUT_POST, 'itemdescription', FILTER_SANITIZE_STRING );
+				$safe_descr = htmlentities($itemdescription);
+				$itemdescription = substr($safe_descr, 0, 400);
+				
+				$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT, array("options" => array("min_range"=>1)));
+				$filepath = '';
+				if (!empty($itemdescription) && $price){
+					itemedit($ID, $price, $itemdescription);
+					print("<span class='error'><br>Item details successfully updated.</span><br>");
+					$newPhoto = $_FILES['newphoto'];
+					$newname = $newPhoto['name'];
+					//no upload error?
+					if ($newPhoto['error'] == 0) {
+						$tempName = $newPhoto['tmp_name'];
+						$fname = $newPhoto['name'];
+						
+						$explode = explode(".", $fname);
+						//get file extension to create name
+						$ext = $explode[1];
+						$filepath = "itemid-" . $ID . "." . $ext;
+						
+						move_uploaded_file( $tempName, "../images/" . $filepath);
+						//print("<p>The file $tempName was uploaded successfully.</p>");
+						
+						edititemimg($ID, $filepath);
+						print("<span class='error'><br>Item image successfully updated. Please refresh the page as the image may be cached.</span><br>");
+					}
+					else {
+						//print("<span class='error'><br>No file uploaded.</span><br>");
+					}
+				}
+				else {
+					print("<span class='error'><br>Please make sure you are within item property limits and fields are not blank (400 chars for description, price is integer > 0).</span><br>");
+				}
+				$result = $mysqli->query($query);
+				$row = $result->fetch_assoc();
+				
+			}
+			print("<img class='itemimg' src='../images/{$row['itemfilepath']}' alt='{$row['itemfilepath']}'/>");
     ?>
 
 	<!-- This page will display the following information if the user is a guest. If session indicates
@@ -43,8 +112,11 @@
 	-->
     <div class="itemdesc">
     <?php
-      if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // Then you are a vendor on items.php
-        print("
+		
+      if ($isvalidvendor) { // Then you are a vendor on items.php
+        $result = $mysqli->query($query);
+				$row = $result->fetch_assoc();
+				print("
                 <form method='post' action='./items.php?itemID=$ID' id='addtocart' enctype='multipart/form-data'>
                   <h1 id='name'>{$row['itemname']}</h1>
                   <span>Price ($): </span><input type='text' value='{$row['price']}' name='price'/>
@@ -91,46 +163,13 @@
       }
     ?>
 
-    <?php
-      if (isset($_POST['edititem'])) { // Edit form was submitted
-        $price = isset($_POST['price']) ? filter_var($_POST['price'], FILTER_SANITIZE_STRING) : null;
-        $itemDescription = isset($_POST['itemdescription']) ? substr(filter_var($_POST['itemdescription'], FILTER_SANITIZE_STRING), 400) : null;
-
-
-        // make sure price is numeric or null
-        if ($price == null || is_numeric($price)) { // Then price is in correct form
-          // Handle Photo
-          if (! empty($_FILES['newphoto'])) {
-            echo "<pre>" . var_dump($_FILES['newphoto']) . "</pre>";
-            $newfile=$_FILES['newphoto'];
-            $tempName=$newfile['tmp_name'];
-            $name=$newfile['name'];
-            $location='../images/'.$name;
-            move_uploaded_file($tempName, $location);
-            $query = "UPDATE `items` SET description=$itemdescription, filepath=$name, price=$price WHERE items.itemid = '$ID'";
-          } else {
-            $query = "UPDATE `items` SET description=$itemdescription, filepath=null, price=$price WHERE items.itemid = '$ID'";
-          }
-          $result = $mysqli->query($query);
-          if ($result) {
-            print ($query);
-            print ("<p>YYYYYAYYAYA</p>");
-          } else {
-            print ($query);
-            print ("<p>UGGHGSG!</p>");
-          }
-        }
-      }
-    ?>
-
-
-
-
-
     </div> <!-- end div itemdesc -->
 
     </div> <!-- end div itemscontent -->
-
+		<?php 
+					}//valid itemid
+				} //input is a number
+		?>
     <div class="footer">
       <?php include "../includes/footer.php"; ?>
     </div>

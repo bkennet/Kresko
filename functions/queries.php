@@ -267,7 +267,24 @@
 		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$query = "UPDATE items SET filepath='{$filepath}' WHERE itemid='{$itemid}'; ";
 		if($mysqli2->query($query)){
-			print("Success modifying filepath");
+			//print("Success modifying filepath");
 		}
+	}
+	
+	/*get vendorid of item - assumes itemid is valid!*/
+	function getvendorofitem ($itemid){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "SELECT vendorid FROM items WHERE itemid = {$itemid};";
+		$result = $mysqli2->query($query);
+		$row = $result->fetch_assoc();
+		return $row['vendorid'];
+	}
+	/*edit price, description of item - assumes all is validated already */
+	function itemedit($itemid, $price, $description){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "UPDATE items SET price='{$price}', description='{$description}' WHERE itemid = {$itemid};";
+		$result = $mysqli2->query($query);
+		//returns positive if rows were altered
+		return $mysqli2->affected_rows;
 	}
 ?>
