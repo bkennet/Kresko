@@ -24,7 +24,7 @@
 
         <?php 
         print("
-          <img src='../images/pants/{$row['vendorfilepath']}' alt='{$row['vendorfilepath']}'>
+          <img src='../images/{$row['vendorfilepath']}' alt='{$row['vendorfilepath']}'>
           <h1>{$row['vendorname']}</h1>
           <h2>Contact: {$row['email']}</h2>");
         ?>
@@ -32,7 +32,7 @@
       </div>
 
     <?php
-    print("<img class='itemimg' src='../images/pants/{$row['itemfilepath']}'' alt='{$row['itemfilepath']}'");
+    print("<img class='itemimg' src='../images/{$row['itemfilepath']}'' alt='{$row['itemfilepath']}'");
     ?>
 
 	<!-- This page will display the following information if the user is a guest. If session indicates

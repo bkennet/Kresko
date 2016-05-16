@@ -16,7 +16,7 @@
           require_once '../config.php';
           $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-          $ID = isset($_SESSION['logged_usertype'] && $SESSION['logged_usertype'] == 2) ? $_SESSION['logged_userid'] : $_GET['categoryID'];
+          // $ID = isset($_SESSION['logged_usertype'] && $SESSION['logged_usertype'] == 2) ? $_SESSION['logged_userid'] : $_GET['categoryID'];
 
           if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // then vendor is logged in
 
@@ -52,7 +52,7 @@
           ?>  
         </div>
 
-      <div class=s"gallery">
+      <div class="gallery">
 
         <?php
             while ($row = $result->fetch_assoc()) {
@@ -62,7 +62,7 @@
                         <div class='gridinfo'>
                           <h1>{$row['itemname']}</h1>
                           <h2>{$row['vendorname']}</h2>
-                          <h2 class='catprice'>{$row['price']}</h2>
+                          <h2 class='catprice'>\${$row['price']}</h2>
                         </div>
                       </div>
                     </a>");
