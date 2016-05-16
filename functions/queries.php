@@ -108,8 +108,7 @@
 	}
 	//get item info from db
 	function getiteminfo ($itemid){
-		$query = "SELECT * from items WHERE items.itemid = $itemid;
-		";
+		$query = "SELECT * from items WHERE items.itemid = $itemid;";
 		return $query;
 	}
 	/********/
@@ -117,51 +116,58 @@
 	//create new order 
 	function createorderquery ($address){
 		$date = date("Y-m-d");
-		$query = "INSERT INTO orders (creation_date, userid, address) VALUES ('$date', '1', '$address'));";
+		$query = "INSERT INTO orders (creation_date, userid, address) VALUES ('$date', '1', '$address');";
 		return $query;
 	}
 	
 	function additemtoorderquery($itemid, $orderid, $price, $quantity){
 		$query = "INSERT INTO itemsinorders (itemid, price, quantity, orderid) VALUES ('$itemid', '$orderid', '$price', '$quantity');";
-		return query;
+		return $query;
 	}
 	/**Creates order from cart **/
 	function createorder($address){
-		$tempmysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, true);
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		//create new order
-		$tempresult = $mysqli2->query(createorderquery($address));
-		if( $mysqli->query($sql) ) {
+		$query = createorderquery($address);
+		$tempresult = $mysqli2->query($query);
+		print($query);
+		print($tempresult);
+		if( $mysqli2->query($tempresult) ) {
 			//get orderid of created order
-			$orderid = $tempmysqli->insert_id;
+			$orderid = $mysqli2->insert_id;
 			if (isset($_SESSION['cart'])){
 				$cartsession = $_SESSION['cart'];
 				foreach ($cartsession as $itemid => $itemqty){
 					$tempresult = $mysqli2->query(getiteminfo($itemid));
-					if ($tempresult && tempresult->num_rows == 1){
+					if ($tempresult && $tempresult->num_rows == 1){
 						$row = $tempresult->fetch_assoc();
 						$itemprice = $row['price'];
 						//add items to itemorders
-						$tempresult = $mysqli2->query(additemtoorderquery($itemid, $orderid, $itemprice, $itemqty))
+						$query = additemtoorderquery($itemid, $orderid, $itemprice, $itemqty);
+						$tempresult = $mysqli2->query($query);
+						$print_r($query);
 						if (!$tempresult){
-							print ("<span class='error'>Problem adding item to order! Please contact sales team at kreskosales@gmail.com.</span>");
+							print ("<span class='error'><br>Problem adding an item to order! Please contact sales team at kreskosales@gmail.com.</span>");
 						}
 						print_r($tempresult);
 					}
 					else {
-						print ("<span class='error'>Problem adding item to order, itemID is invalid.</span>");
+						print ("<span class='error'><br>Problem adding item to order, itemID is invalid.</span>");
 					}
 					
 					
 				}
+				return $orderid;
 			}
 			else {
-				print ("<span class='error'>Problem creating order! Please contact sales team at kreskosales@gmail.com.</span>");
+				print ("<span class='error'><br>Problem creating order! Please contact sales team at kreskosales@gmail.com.</span>");
+				return -1;
 			}
 			
 		}	
 		else {
 			print ("<span class='error'>Problem creating order! Please contact sales team at kreskosales@gmail.com.</span>");
+			return -1;
 		}
-		$row = $tempresult->fetch_assoc();
 	}
 ?>
