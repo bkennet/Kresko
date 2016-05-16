@@ -49,11 +49,9 @@
 
 	/* Used in category.php */
 
-	function getVendorItems($vendorID) {
-		return "SELECT * FROM `items` 
-			INNER JOIN `vendors` ON 
-			vendors.vendorid = items.vendorid
-			WHERE items.vendorid = $vendorID";
+	function getVendorItems($userID) {
+		return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price FROM `vendors` 
+		INNER JOIN `items` ON vendors.vendorid = items.vendorid AND vendors.userid = '$userID'";
 	}
 
 	function getCategoryItems($categoryID) { 
