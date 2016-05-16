@@ -47,7 +47,7 @@
             $result=$mysqli->query($query);
             while ($row = $result->fetch_assoc()) {
               print("<img class='vendor-image' src='{$row['filepath']}' alt='artisan-image'/>
-                    <form onsubmit='return validateEditVendor(this);' action='profile.php' method='post' id='save-profile' enctype='multipart/form-data'>
+                    <form action='profile.php' method='post' id='save-profile' enctype='multipart/form-data'>
                     <div class='vendor-info'>
                     <h3 class='white'>{$row['vendorname']}</h3>
                     <textarea rows='4' class='edit-description' name='descriptionedit'>{$row['description']}</textarea><br>
@@ -63,7 +63,8 @@
       <?php
         // VENDOR EDIT FUNCTIONALITY (FOR VENDOR)
         if (isset($_POST['edit_profile'])) {
-          $query="UPDATE vendors SET description='{$_POST['descriptionedit']}' WHERE userid='$userid'";
+          $desc = filter_var("{$_POST['descriptionedit']}", FILTER_SANITIZE_STRING);
+          $query="UPDATE vendors SET description='$desc' WHERE userid='$userid'";
           $mysqli->query($query);
           if (!empty($_FILES['newphoto'])) {
             $newfile=$_FILES['newphoto'];

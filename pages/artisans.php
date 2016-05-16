@@ -89,10 +89,11 @@
                   $name=$newfile['name'];
                   $location='../images/vendors/'.$name;
                   move_uploaded_file($tempName, $location);
-                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'{$_POST['artisandesc']}','{$_POST['artisanemail']}', '$location', $id,'{$_POST['artisanname']}')";
+                  $desc = filter_var("{$_POST['artisandesc']}", FILTER_SANITIZE_STRING);
+                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'$desc','{$_POST['artisanemail']}', '$location', $id,'{$_POST['artisanname']}')";
                   $mysqli->query($query);
                 } else {
-                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'{$_POST['artisandesc']}','{$_POST['artisanemail']}', null, $id,'{$_POST['artisanname']}')";
+                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'$desc','{$_POST['artisanemail']}', null, $id,'{$_POST['artisanname']}')";
                   $mysqli->query($query);
                 }
               }
