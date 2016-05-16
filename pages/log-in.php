@@ -28,7 +28,7 @@
 								$prev = "index.php";
 							}
 							print "<div class='log-in-box-header'><span class='success'><p>Success! You've been logged out!</p></span><br>";
-							print "<p>Go back to <a href='{$prev}'>your last page</a></p></div>";
+							print "<p>Go back to <a href='{$prev}'>home</a></p></div>";
 					
 					?>
 					<!-- Needs js enabled! -->
@@ -134,8 +134,8 @@
 							if (empty($prev)){
 								$prev = "index.php";
 							}
-							print "<span class='success'><p>Success! You've been logged in, {$_SESSION['logged_user']}</p></span><br>";
-							print "<p>Go back <a href='{$prev}'>your last page</a></p>";
+							print "<div class='log-in-box-header'><span class='success'><p>Success! You've been logged in, {$_SESSION['logged_user']}</p></span><br>";
+							print "<p>Go back <a href='{$prev}'>home</a></p></div>";
 					?>
 					<!-- Needs js enabled! -->
 					<script type="text/javascript">
@@ -150,8 +150,8 @@
 				<?php
 					}
 					else {
-								echo "<span class='error'><p>You did not login successfully.</p></span>";
-								echo "<p>Please <a href='log-in.php'>try</a> again.</p>";
+								echo "<div class='log-in-box-header'><span class='error'><p>You did not login successfully.<br></p></span>";
+								echo "<p>Please <a href='log-in.php'>try</a> again.</p></div>";
 							}
 				}
 			?>
