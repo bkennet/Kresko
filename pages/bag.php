@@ -16,7 +16,6 @@
 		1. Check to see if post variables are there, process addition to session
 		*/
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			print("SERVER REQUEST SENT ITEMS TO ADD TO CART");
 			if (isset ($_POST['remove']) && isset($_POST['itemID'])){
 				removefromcart($_POST['itemID']);
 				print("Remove from cart");
@@ -28,11 +27,17 @@
 		/*
 		2. After session is processed, display cart info below
 		*/
+		$totalcost = 0;
 	?>
      <div class="bagcontent">
 
      	<div class="selection"> <!-- This is where the user's shopping cart will display the items they selected -->
-     		<h1>SELECTION</h1>
+     		<?php
+					if (isset($_SESSION['cart'])){
+						print("<a href='./bag.php?clear=yes'>Click HERE to empty your cart</a>");
+					}
+				?>
+				<h1>SELECTION</h1>
      		<table class="cart">
      			<tr id="tableheading">
      				<td>Item</td>
@@ -43,6 +48,12 @@
      			</tr>
 				
 				<?php
+				//clear cart
+					if (isset($_GET['clear'])){
+						if (isset($_SESSION['cart'])){
+							unset($_SESSION['cart']);
+						}
+					}
 					if (isset($_SESSION['cart'])){
 						$cartsession = $_SESSION['cart'];
 						foreach ($cartsession as $itemid => $itemqty){
@@ -51,6 +62,7 @@
 							$row = $result->fetch_assoc();
 							if ($result){
 								$total = $row['price'] * $itemqty;
+								$totalcost += $total;
 								print ("
 								<tr>
 								<td>{$row['itemid']}</td>
@@ -77,12 +89,12 @@
      	<div class="checkout"> <!-- This is where the price breakdwon with be (sum, tax, shipping) as well as the total sum -->
 
      	    <div id="breakdown">
-     			<p> SUM PRICE:</p>
+     			<p> SUM PRICE: <?php print($totalcost);?></p>
      			<p> TAX:</p>
      			<p> SHIPPING:</p>
      		</div>
      		
-     		<p id="total"> TOTAL: </p>
+     		<p id="total"> TOTAL: <?php print("$".$totalcost.".00");?></p>
 
      		<form method="get" action="./checkout.php" id="placeorder"> <!-- This button will bring the user to an external payment site such as PayPal -->
         		<button class="button">PLACE ORDER</button>
