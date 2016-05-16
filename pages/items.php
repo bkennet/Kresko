@@ -56,7 +56,7 @@
                   <input type='hidden' name='itemID' value=$ID />
                   <input type='submit' class='button' value='Edit Item' />
                 </form>
-          ")
+          ");
       }
       else { // Then you are a customer on items.php
         
