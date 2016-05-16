@@ -4,7 +4,6 @@
   <head>
     <?php include "../includes/header.php"; ?>
     <?php include "../functions/queries.php"; ?>
-    <?php echo "<pre>" . var_dump($_SESSION) . "</pre>"; ?>
   </head>
   <body>
     <div class="container-fluid page-wrapper">
@@ -99,7 +98,7 @@
         // $itemImage = isset($_POST['newphoto']) ? $_POST['newphoto'] : null;
 
         // make sure price is numeric or null
-        
+
       } 
 
     ?>
