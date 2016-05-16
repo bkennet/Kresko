@@ -381,12 +381,6 @@ input:-webkit-autofill {
 	padding-right: 115px;
 }
 
-#sort {
-	color: white;
-/*	text-align: right;*/
-	border-bottom: 1px solid white;
-}
-
 #griddisplay {
 	border-style: solid;
 }
@@ -459,13 +453,14 @@ input:-webkit-autofill {
 }
 
 #sort {
-	color: white;
+	/*color: white;*/
 /*	text-align: right;*/
 	margin-right: 8%;
 	border-bottom: 1px solid white;
 	margin-left: 8%;
 	margin-bottom: 30px;
 	text-align: right;
+	border-bottom: 1px solid white;
 }
 
 /* For artisans page */
