@@ -50,7 +50,7 @@
                             <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
                           </div>
                           <div class='vendor-info'>
-                            <h1><a class='white' href='./profile.php?vendorID={$row['vendorid']}'>{$row['vendorname']}</a></h1>
+                            <h1>{$row['vendorname']}</h1>
                             <p class='white'>{$row['description']}</p>
                           </div>
                         </div>
@@ -69,7 +69,7 @@
                                   <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
                                 </div>
                                 <div class='vendor-info'>
-                                  <h1><a class='white' href='./profile.php?vendorID={$row['vendorid']}'>{$row['vendorname']}</a></h1>
+                                  <h1>{$row['vendorname']}</h1>
                                   <p class='white'>{$row['description']}</p>
                                 </div>
                               </div>

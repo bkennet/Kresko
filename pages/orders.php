@@ -8,16 +8,19 @@
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
 
-      <?php include "../includes/navigation.php"; ?>
-	  <div class="content-orders">
+    <?php include "../includes/navigation.php"; ?>
+	
 	  <?php
 	   require_once '../config.php';
           $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		
           if (!isset($_SESSION['logged_usertype']) || ($_SESSION['logged_usertype'] != 2 && $_SESSION['logged_usertype'] != 1)) { // then vendor or admin is logged in
-            print("<span class='error'>Sorry, you are not authorized to view this page.</span>");
+            print("<h2 class='center'><span class='error'>Sorry, you are not authorized to view this page.</span></h2>");
           }
 		  else {
+				print("<h2 class='center white'>Orders</h2>");
+				print("<div class=content-orders>");
+				print("<span class='white'>Status code of 0 means not yet shipped, status code of 1 means shipped.</span>");
 			  $isadmin = 0;
 			  if ($_SESSION['logged_usertype'] == 1){
 				 $isadmin = 1;
