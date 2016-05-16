@@ -5,6 +5,7 @@
     <?php include "../includes/header.php"; ?>
     <?php include "../functions/queries.php"; ?>
     <script src="../functions/sort.js"></script>
+    <?php echo "<pre>" . var_dump($) "</pre>"
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
