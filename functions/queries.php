@@ -53,7 +53,7 @@
 		return "SELECT * FROM `items` 
 			INNER JOIN `vendors` ON 
 			vendors.vendorid = items.vendorid
-			WHERE items.vendorid = '$vendorID'";
+			WHERE items.vendorid = '$vendorID' ";
 	}
 
 	function getCategoryItems($categoryID) { 
