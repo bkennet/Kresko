@@ -14,7 +14,7 @@
 
 /* Matt's Local Credentials */
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'Kresko');
+define('DB_NAME', 'info230_SP16_avengerssp16');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 // ?>

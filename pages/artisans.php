@@ -79,8 +79,8 @@
             }
 
             if (isset($_POST['addvendorbutton'])) {
-              $query= "INSERT INTO `users`(`userid`, `username`, `email`, `creation_date`, `pw`, `usertype`) VALUES (null,'{$_POST['artisanname']}','{$_POST['artisanemail']}',null,'{$_POST['artisanpw']}',2)";
-              echo($query);
+              $hashed_password = password_hash("{$_POST['artisanpw']}", PASSWORD_DEFAULT);
+              $query= "INSERT INTO `users`(`userid`, `username`, `email`, `creation_date`, `pw`, `usertype`) VALUES (null,'{$_POST['artisanname']}','{$_POST['artisanemail']}',null,'$hashed_password',2)";
               if ($mysqli->query($query) === TRUE) {
                 $id=$mysqli->insert_id;
                 if (! empty($_FILES['newphoto'])) {
