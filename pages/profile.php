@@ -5,7 +5,6 @@
     <script src = "../includes/validate.js"></script>
     <?php include "../includes/header.php"; ?>
     <?php include "../config.php";?>
-    <?php print('<pre>' . var_dump($_SESSION) . '</pre>'); ?>
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
