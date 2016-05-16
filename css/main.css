@@ -139,8 +139,10 @@ p #brand {
 #box1 {
 	height: 400px;
 	width: 50%;
-/*	border-style: solid;
-	border-color: red;*/
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+/*	border-color: red;*/
 	float: left;
 	position: relative;
 
@@ -154,6 +156,9 @@ p #brand {
 #box2 {
 	height: 200px;
 	width: 50%;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 /*	border-style: solid;
 	border-color: orange;*/
 	float: right;
@@ -162,6 +167,9 @@ p #brand {
 #box3 {
 	height: 200px;
 	width: 50%;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 /*	border-style: solid;
 	border-color: blue;*/
 	float: right;
@@ -170,6 +178,9 @@ p #brand {
 #box4 {
 	height: 400px;
 	width: 25%;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 /*	border-style: solid;
 	border-color: purple;*/
 	float: left;
@@ -178,6 +189,9 @@ p #brand {
 #box5 {
 	height: 400px;
 	width: 25%;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 /*	border-style: solid;
 	border-color: green;*/
 	float: left;
@@ -186,6 +200,9 @@ p #brand {
 #box6 {
 	height: 400px;
 	width: 50%;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 /*	border-style: solid;
 	border-color: yellow;*/
 	float: left;
@@ -481,14 +498,14 @@ input:-webkit-autofill {
 	border-bottom: 1px solid white;
 }
 
-.vendor-edit {
+/*.vendor-edit {
 	display: flex;
 	flex-direction: row;
 	height: 33%;
 	width: 80%;
-}
+}*/
 
-.vendor-info {
+/*.vendor-info {
 	padding-left: 20px;
 }
 
@@ -496,7 +513,7 @@ input:-webkit-autofill {
 	height: 200px;
 	width: 200px;
 	/*border: 1px solid white;*/
-}
+
 
 .white {
 	color: white;
@@ -770,5 +787,44 @@ ul {
 
 #total {
 	padding-left: 15px;
+}
+
+.profilecontent{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.vendor-edit{
+	background-color: #e8ebd1;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+.vendor-image{
+	border-radius: 50%;
+	height: 300px;
+	width: 300px;
+	border-style: solid;
+	border-color: black;
+	float: left;
+}
+
+.vendor-edit{
+	margin-left: 8%;
+	margin-right: 8%;
+	overflow: hidden;
+	padding-left: 8%;
+	padding-right: 8%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+}
+
+.vendor-info{
+	float: right;
+	text-align: left;
+	margin-top: auto;
+	margin-bottom: auto;
+	font-family: audrey;
 }
 

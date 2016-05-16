@@ -110,12 +110,12 @@
             </div>
             <br>
             <div class="iteminputs">
-              <span class='white'><label for="priceid">Price: ($)</label></span>
+              <span class='white'><label for="priceid">Price: (integer > 0)</label></span>
               <input type="text" name="price" id="priceid">
             </div>
             <br>
             <div class="iteminputs">
-              <span class='white'><label for="qtyavailid">Quantity available:</label></span>
+              <span class='white'><label for="qtyavailid">Quantity available: (integer > 0)</label></span>
               <input type="text" name="qtyavail" id="qtyavailid">
             </div>
             <div>
