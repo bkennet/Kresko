@@ -40,7 +40,53 @@
                     </div>");
             }
           } 
-					else { ?>
+					else { 
+					
+        // VENDOR EDIT FUNCTIONALITY (FOR VENDOR)
+        if (isset($_POST['edit_profile']) && isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) {
+					$userid = $_SESSION['logged_userid'];
+          $desc = filter_var("{$_POST['descriptionedit']}", FILTER_SANITIZE_STRING);
+					$desc = htmlentities(substr($desc, 0, 400));
+					
+          $query="UPDATE vendors SET description='$desc' WHERE userid='$userid'";
+          $mysqli->query($query);
+					if (isset($_FILES['newphoto']) && isset($_FILES['newphoto']) && $_FILES['newphoto']['error'] == 0) {
+							
+								$newPhoto = $_FILES['newphoto'];
+								$newname = $newPhoto['name'];
+								//no upload error?
+							
+									$tempName = $newPhoto['tmp_name'];
+									$fname = $newPhoto['name'];
+									$vendorid = getvendorid($_SESSION['logged_userid']);
+									$explode = explode(".", $fname);
+									//get file extension to create name
+									$ext = $explode[1];
+									$filepath = "vendorid-" . $vendorid . "." . $ext;
+									
+									move_uploaded_file( $tempName, "../images/" . $filepath);
+									//print("<p>The file $tempName was uploaded successfully.</p>");
+									$query="UPDATE vendors SET filepath='$filepath' WHERE userid='$userid'";
+									$mysqli->query($query);
+					} 
+						else {
+							print("<span class='error'>Error: The file was not uploaded.</span>" );
+						}
+					
+          /**if (!empty($_FILES['newphoto'])) {
+            $newfile=$_FILES['newphoto'];
+            $tempName=$newfile['tmp_name'];
+            $name=$newfile['name'];
+            $location='../images/'.$name;
+            move_uploaded_file($tempName, $location);
+            $query="UPDATE vendors SET filepath='$location' WHERE userid='$userid'";
+            $mysqli->query($query);
+          }**/
+        }
+      
+					
+					
+					?>
             <div class="vendor-edit">
           <?php
             // BEGIN VENDOR VIEW 
@@ -62,48 +108,7 @@
         ?>
         </div> 
       </div>
-      <?php
-        // VENDOR EDIT FUNCTIONALITY (FOR VENDOR)
-        if (isset($_POST['edit_profile'])) {
-          $desc = filter_var("{$_POST['descriptionedit']}", FILTER_SANITIZE_STRING);
-					$desc = htmlentities(substr($desc, 0, 400));
-					
-          $query="UPDATE vendors SET description='$desc' WHERE userid='$userid'";
-          $mysqli->query($query);
-					if (!empty($_FILES['newphoto'])) {
-							
-								$newPhoto = $_FILES['newphoto'];
-								$newname = $newPhoto['name'];
-								//no upload error?
-								if ($newPhoto['error'] == 0) {
-									$tempName = $newPhoto['tmp_name'];
-									$fname = $newPhoto['name'];
-									$vendorid = getvendorid($_SESSION['logged_userid']);
-									$explode = explode(".", $fname);
-									//get file extension to create name
-									$ext = $explode[1];
-									$filepath = "vendorid-" . $newitemid . "." . $ext;
-									
-									move_uploaded_file( $tempName, "../images/" . $filepath);
-									//print("<p>The file $tempName was uploaded successfully.</p>");
-									$query="UPDATE vendors SET filepath='$location' WHERE userid='$userid'";
-									$mysqli->query($query);
-								} 
-								else {
-									print("<span class='error'>Error: The file was not uploaded.</span>");
-								}
-							}
-          /**if (!empty($_FILES['newphoto'])) {
-            $newfile=$_FILES['newphoto'];
-            $tempName=$newfile['tmp_name'];
-            $name=$newfile['name'];
-            $location='../images/'.$name;
-            move_uploaded_file($tempName, $location);
-            $query="UPDATE vendors SET filepath='$location' WHERE userid='$userid'";
-            $mysqli->query($query);
-          }**/
-        }
-      ?>
+      
       
 
       <div class="footer">
