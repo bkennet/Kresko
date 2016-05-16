@@ -43,7 +43,7 @@
 	-->
     <div class="itemdesc">
     <?php
-      if (isset($_SESSION) && $_SESSION['logged_usertype'] == 2) { // Then you are a vendor on items.php
+      if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // Then you are a vendor on items.php
         print("
                 <form method='post' action='./items.php?itemID=$ID' id='addtocart' enctype='multipart/form-data'>
                   <h1 id='name'>{$row['itemname']}</h1>

@@ -98,7 +98,6 @@
 					<div class='new-item-body'>
           <!-- <div class='log-in-box-content'> -->
           <h4 class="white">Create New Item</h4>
-          <p><span class='white'>Vendor:</span> <span class='vendorname'>Vendor Name</span>
           <form action="./add-item.php" method="post" enctype="multipart/form-data">
             <div class="iteminputs">
               <span class='white'><label for="itemname">Item name: (30 character max)</label></span>
@@ -111,7 +110,7 @@
             </div>
             <br>
             <div class="iteminputs">
-              <span class='white'><label for="priceid">Price: (in USD)</label></span>
+              <span class='white'><label for="priceid">Price: ($)</label></span>
               <input type="text" name="price" id="priceid">
             </div>
             <br>
