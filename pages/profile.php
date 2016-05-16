@@ -14,7 +14,7 @@
 
       <?php include "../includes/navigation.php"; ?>
 
-      <div class="content">
+      <div class="profilecontent">
         <?php
           $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
           if ($mysqli->errno) {
@@ -50,7 +50,8 @@
 					
           $query="UPDATE vendors SET description='$desc' WHERE userid='$userid'";
           $mysqli->query($query);
-					if (isset($_FILES['newphoto']) && isset($_FILES['newphoto']) && $_FILES['newphoto']['error'] == 0) {
+					
+          if (isset($_FILES['newphoto']) && isset($_FILES['newphoto']) && $_FILES['newphoto']['error'] == 0) {
 							
 								$newPhoto = $_FILES['newphoto'];
 								$newname = $newPhoto['name'];
@@ -68,7 +69,9 @@
 									//print("<p>The file $tempName was uploaded successfully.</p>");
 									$query="UPDATE vendors SET filepath='$filepath' WHERE userid='$userid'";
 									$mysqli->query($query);
-					} 
+					}
+
+           
 						else {
 							print("<span class='error'>Error: The file was not uploaded.</span>" );
 						}
@@ -96,12 +99,16 @@
             while ($row = $result->fetch_assoc()) {
               print("<img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
                     <form action='profile.php' method='post' id='save-profile' enctype='multipart/form-data'>
-                    <div class='vendor-info'>
-                    <h3 class='white'>{$row['vendorname']}</h3>
-                    <textarea rows='4' class='edit-description' name='descriptionedit'>{$row['description']}</textarea><br>
-                    <span class='white'>Modify vendor image:</span> <input class='white' type='file' name='newphoto'><br><br>
-                    </div>
-                    <input type='submit' name='edit_profile' value='Save Changes'>
+                      <div class='vendor-info'>
+                        <h1>{$row['vendorname']}</h1>
+                        <span >Upload new profile image:</span> <input type='file' name='newphoto'><br><br>
+                        <textarea rows='4' class='edit-description' name='descriptionedit'>{$row['description']}</textarea><br><br>
+
+
+                        <input type='submit' name='edit_profile' value='Save Changes'>
+                      </div>
+                  
+                    
                     </form>");
             }
           }
