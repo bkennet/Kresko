@@ -49,11 +49,11 @@
 
 	/* Used in category.php */
 
-	function getVendorItems($userID) {
-		return "SELECT items.filepath AS 'itemfilepath', itemid, itemname, vendorname, price FROM `vendors` 
-			INNER JOIN `items` ON 
-			vendors.vendorid = items.vendorid AND 
-			vendors.userid = '$userID'";
+	function getVendorItems($vendorID) {
+		return "SELECT * FROM `items` 
+			INNER JOIN `vendors` ON 
+			vendors.vendorid = items.vendorid
+			WHERE items.vendorid = $vendorID";
 	}
 
 	function getCategoryItems($categoryID) { 
@@ -232,5 +232,44 @@
 			//send message to me and to person who left feedback
 			mail ( $email, 'KRESKO - Thank you for your order', "<html><body>" . $message . "</body></html>", $headers);
 			return $message;
+	}
+	
+	/*Get vendor ID from user ID, assumes user is valid vendor */
+	function getvendorid ($userid){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "SELECT vendorid from vendors WHERE userid = $userid";
+		$result = $mysqli2->query($query);
+		$row = $result->fetch_assoc();
+		return $row['vendorid'];
+	}
+	
+	/*get all subcategories sorted by categories*/
+	function getcats(){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "SELECT catid, category, subcategory from categories ORDER BY category ASC, subcategory ASC";
+		$result = $mysqli2->query($query);
+		return $result;
+	}
+	
+	/* add item to DB */
+	function additem($vendorid, $name, $descr, $price, $qty, $catid, $filepath){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "INSERT INTO items (vendorid, itemname, description, price, qty_avail, catid, filepath) VALUES ('{$vendorid}', '{$name}', '{$descr}', '{$price}', '{$qty}', '{$catid}', '{$filepath}');";
+		if ($mysqli2->query($query)){
+			$newitemid = $mysqli2->insert_id;
+			print("<br>Item {$newitemid} {$name} was added successfully.");
+			return $newitemid;
+		}
+		print("Problem adding item.");
+		return -1;
+	}
+	
+	/*edit filepath, assumes itemid and filepath are valid*/
+	function edititemimg ($itemid, $filepath){
+		$mysqli2 = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$query = "UPDATE items SET filepath='{$filepath}' WHERE itemid='{$itemid}'; ";
+		if($mysqli2->query($query)){
+			print("Success modifying filepath");
+		}
 	}
 ?>
