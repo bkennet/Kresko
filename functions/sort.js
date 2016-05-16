@@ -19,7 +19,7 @@ $(document).ready(function(){
         $('.gallery').html("");
 
       for (var i=0; i<data.length; i++){
-        $(".gallery").append("<a href='items.php?itemID=" + data[i]['itemid'] + "'><div><img src='../images/" + data[i]['filepath'] + "' alt='Item Image'><div class='gridinfo'><h1>" + data[i]['itemname'] + "</h1><h2>" + data[i]['vendorname'] + "</h2><h2 class='catprice'>$" + data[i]['price'] + "</h2></div></div></a>");
+        $(".gallery").append("<a class='col-md-3' href='items.php?itemID=" + data[i]['itemid'] + "'><div><img src='../images/" + data[i]['filepath'] + "' alt='Item Image'><div class='gridinfo'><h1>" + data[i]['itemname'] + "</h1><h2>" + data[i]['vendorname'] + "</h2><h2 class='catprice'>$" + data[i]['price'] + "</h2></div></div></a>");
       }
     })
     .fail(function(err){
