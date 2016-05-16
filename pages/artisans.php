@@ -36,7 +36,7 @@
             <p class="white">Artisan Name: </p> <input type="text" name="artisanname" id="artisanname"/>
             <p class="white">Artisan E-mail: </p> <input type="text" name="artisanemail" id="artisanemail"/> <br>
             <p class="white">Artisan Password: </p> <input type="text" name="artisanpw" id="artisanpw"/> <br>
-            <p class="white">Artisan Description: </p><textarea rows="4" name="artisandesc" id="artisandesc"> </textarea><br>
+            <p class="white">Artisan Description: </p> <textarea rows="4" name="artisandesc" id="artisandesc"> </textarea><br>
             <span class='white'>Modify vendor image:</span> <input class="white" id="new-photo" type="file" name="newphoto"/> <br>
             <input type="submit" value="Add Artisan" name="addvendorbutton" id="addvendorbutton">
           </form>

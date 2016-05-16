@@ -101,6 +101,7 @@
         if ($price == null || is_numeric($price)) { // Then price is in correct form
           // Handle Photo
           if (! empty($_FILES['newphoto'])) {
+            echo "<pre>" . var_dump($_FILES['newphoto']) . "</pre>";
             $newfile=$_FILES['newphoto'];
             $tempName=$newfile['tmp_name'];
             $name=$newfile['name'];
@@ -110,8 +111,14 @@
           } else {
             $query = "UPDATE `items` SET description=$itemdescription, filepath=null, price=$price WHERE items.itemid = '$ID'";
           }
-          $mysqli->query($query);
-          print("<p>Success! Item has updated</p>");
+          $result = $mysqli->query($query);
+          if ($result) {
+            print ($query);
+            print ("<p>YYYYYAYYAYA</p>");
+          } else {
+            print ($query);
+            print ("<p>UGGHGSG!</p>");
+          }
         }
       }
     ?>
