@@ -5,7 +5,6 @@
     <?php include "../includes/header.php"; ?>
     <?php include "../functions/queries.php"; ?>
     <script src="../functions/sort.js"></script>
-    <?php echo "<pre>" . var_dump($) "</pre>"
   </head>
   <body>
     <div class='container-fluid page-wrapper'> <!-- This will wrap the entire page: allows us to use bootstrap rows and columns -->
@@ -21,7 +20,7 @@
 
           if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // then vendor is logged in
 
-            $ID = $_SESSION['logged_userid'];
+            $ID = $_SESSION['logged_userid']; // userID of vendor
             $query = getVendorItems($ID); 
           } else {
             $ID = $_GET['categoryID']; // is either a number (1-7) or 'clothing' or 'accessories';
@@ -38,7 +37,7 @@
           <span class='white'>Sort by:</span>
 
           <?php
-            print("<select categoryID=$ID id='wind'>
+            print("<select usertype={$_SESSION['logged_usertype']} categoryID=$ID id='wind'>
                   <option value='relevance'>Relevance</option>
                   <option value='pricehigh'>Price: High to Low</option>
                   <option value='pricelow'>Price: Low to High</option>

@@ -79,8 +79,8 @@
             }
 
             if (isset($_POST['addvendorbutton'])) {
-              $query= "INSERT INTO `users`(`userid`, `username`, `email`, `creation_date`, `pw`, `usertype`) VALUES (null,'{$_POST['artisanname']}','{$_POST['artisanemail']}',null,'{$_POST['artisanpw']}',2)";
-              echo($query);
+              $hashed_password = password_hash("{$_POST['artisanpw']}", PASSWORD_DEFAULT);
+              $query= "INSERT INTO `users`(`userid`, `username`, `email`, `creation_date`, `pw`, `usertype`) VALUES (null,'{$_POST['artisanname']}','{$_POST['artisanemail']}',null,'$hashed_password',2)";
               if ($mysqli->query($query) === TRUE) {
                 $id=$mysqli->insert_id;
                 if (! empty($_FILES['newphoto'])) {
@@ -89,10 +89,13 @@
                   $name=$newfile['name'];
                   $location='../images/'.$name;
                   move_uploaded_file($tempName, $location);
-                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'{$_POST['artisandesc']}','{$_POST['artisanemail']}', '$name', $id,'{$_POST['artisanname']}')";
+
+                  $desc = filter_var("{$_POST['artisandesc']}", FILTER_SANITIZE_STRING);
+                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'$desc','{$_POST['artisanemail']}', '$name', $id,'{$_POST['artisanname']}')";
+
                   $mysqli->query($query);
                 } else {
-                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'{$_POST['artisandesc']}','{$_POST['artisanemail']}', null, $id,'{$_POST['artisanname']}')";
+                  $query="INSERT INTO vendors(vendorid, description, email,filepath, userid,vendorname) VALUES (null,'$desc','{$_POST['artisanemail']}', null, $id,'{$_POST['artisanname']}')";
                   $mysqli->query($query);
                 }
               }

@@ -5,8 +5,39 @@
 
 	$sorttype = filter_input(INPUT_POST, "sort", FILTER_SANITIZE_STRING);
 	$ID = filter_input(INPUT_POST, "ID", FILTER_SANITIZE_STRING);
+	$usertype = filter_input(INPUT_POST, "type", FILTER_SANITIZE_STRING);
 
-		if (is_numeric($ID)) {
+		if ($usertype == "2") { // Vendor is looking at their items
+			if ($sorttype == "relevance") {
+				$query = "SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `vendors` 
+						INNER JOIN `items` ON 
+						vendors.vendorid = items.vendorid AND 
+						vendors.userid = '$ID'";
+			}
+			elseif ($sorttype == 'pricehigh') {
+				$query = "SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `vendors` 
+						INNER JOIN `items` ON 
+						vendors.vendorid = items.vendorid AND 
+						vendors.userid = '$ID'
+						ORDER BY price DESC";
+			}
+			elseif ($sorttype == 'pricelow') {
+				$query = "SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `vendors` 
+						INNER JOIN `items` ON 
+						vendors.vendorid = items.vendorid AND 
+						vendors.userid = '$ID'
+						ORDER BY price ASC";
+			}
+			elseif ($sorttype == 'alphabetical') {
+				$query = "SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `vendors` 
+						INNER JOIN `items` ON 
+						vendors.vendorid = items.vendorid AND 
+						vendors.userid = '$ID'
+						ORDER BY itemname ASC";
+			}
+		}
+
+		elseif (is_numeric($ID)) {
 
 			if ($sorttype == "relevance"){
 				$query = ("SELECT items.itemid, items.itemname, items.price, items.filepath, vendors.vendorname FROM `items` 

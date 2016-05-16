@@ -3,7 +3,6 @@ function validateAddVendor(form) {
 	reason+= validateVendorName(form.artisanname);
 	reason+= validateVendorEmail(form.artisanemail);
 	reason+= validateVendorPw(form.artisanpw);
-	reason+=validateDescription(form.artisandesc);
 
 	if (reason!="") {
 		event.preventDefault();
@@ -64,31 +63,4 @@ function validateVendorPw(field) {
 		field.className='';
 	}
 	return error;
-}
-
-function validateDescription(field) {
-	var error="";
-	var illegalChars=/[^A-Za-z0-9 ,-]/;
-
-	if (illegalChars.test(field.value)) {
-		field.className="invalid";
-		error= "The description contains illegal characters.\n"
-	}
-
-	else {
-		field.className='';
-	}
-	return error;
-}
-
-function validateEditVendor(form) {
-	var reason="";
-	reason+=validateDescription(form.descriptionedit);
-
-	if (reason!="") {
-		event.preventDefault();
-		alert("Some fields need correction:\n"+reason);
-		return false;
-	}
-	return true;
 }

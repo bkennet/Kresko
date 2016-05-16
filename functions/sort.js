@@ -3,13 +3,14 @@ $(document).ready(function(){
   $('select').change(function() {
 
     var sorttype = $("#wind").val();
+    var usertype = $("#wind").attr('usertype');
     var ID = $("#wind").attr('categoryID');
 
 
     $.ajax({
       url: '../functions/sort.php',
       type: 'POST',
-      data: {sort: sorttype, ID: ID},
+      data: {sort: sorttype, ID: ID, type: usertype},
       dataType: 'JSON'
     })
     .done(function(data) {
