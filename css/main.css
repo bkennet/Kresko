@@ -81,10 +81,16 @@ p #brand {
 }
 
 .artisan {
-	width: 30%;
-	margin-right: 15%;
+
+	/*width: 30%;*/
+	/*margin-right: 15%;*/
 	margin-bottom: 30px;
-	float: right;
+	margin-left: 15%;
+	/*float: right;*/
+}
+
+#artisandesc {
+	width: 20%;
 }
 
 #homepicture {

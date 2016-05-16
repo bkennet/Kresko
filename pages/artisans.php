@@ -19,64 +19,79 @@
           }
           $query = "SELECT * FROM vendors";
           $result = $mysqli->query($query);
-          if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype']==1 ) { // BEGIN ADMIN FUNCTIONALITY ?>
-          <form action="artisans.php" method="post" class="artisan">
-            <p class="white">Delete an Artisan</p> <br>
-            <select name="vendorid">
-              <?php
-                while($row=$result->fetch_assoc()) {
-                  print("<option value='{$row['vendorid']}'>{$row['vendorname']}</option>");
-                }
-              ?>
-            </select> <br>
-            <input type="submit" value="Delete Artisan" name="deletevendorbutton" id="deletevendorbutton">
-          </form>
-          <form onsubmit="return validateAddVendor(this);" action = "artisans.php" method="post" class="artisan" enctype="multipart/form-data"> 
-            <p class="white">Add an Artisan</p>
-            <p class="white">Artisan Name: </p> <input type="text" name="artisanname" id="artisanname"/>
-            <p class="white">Artisan E-mail: </p> <input type="text" name="artisanemail" id="artisanemail"/> <br>
-            <p class="white">Artisan Password: </p> <input type="text" name="artisanpw" id="artisanpw"/> <br>
-            <p class="white">Artisan Description: </p> <textarea rows="4" name="artisandesc" id="artisandesc"> </textarea><br>
-            <span class='white'>Modify vendor image:</span> <input class="white" id="new-photo" type="file" name="newphoto"/> <br>
-            <input type="submit" value="Add Artisan" name="addvendorbutton" id="addvendorbutton">
-          </form>
-          <?php
-          } // END ADMIN FUNCTIONALITY
-
-          // BEGIN CUSTOMER VIEW
-            $result= $mysqli->query($query);
-            if ($result->num_rows == 0) {
-              print("There are no Artisans available!");
-            } else {
-                while ($row = $result->fetch_assoc()) {
-                  print("
-                          <div class='content-artisans'>
-                            <div class='vendor'>
-                              <div>
-                                <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
-                              </div>
-                              <div class='vendor-info'>
-                                <h1><a class='white' href='./profile.php?vendorID={$row['vendorid']}'>{$row['vendorname']}</a></h1>
-                                <p class='white'>{$row['description']}</p>
-                              </div>
-                            </div>
-                          </div>");
-                }
+          if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype']==1 ) { // BEGIN ADMIN VIEW
+            /*print("<form action='artisans.php' method='post' class='artisan'>
+                      <p class='white'>Delete an Artisan</p> <br>
+                      <select name='vendorid'>
+                        <?php
+                          // while($row=$result->fetch_assoc()) {
+                          //   print('<option value='{$row['vendorid']}'>{$row['vendorname']}</option>');
+                          }
+                        ?>
+                      </select> <br>
+                      <input type='submit' value='Delete Artisan' name='deletevendorbutton' id='deletevendorbutton'>
+                    </form>"); */
+            print("
+                    <form onsubmit='return validateAddVendor(this);' action = 'artisans.php' method='post' class='artisan' enctype='multipart/form-data'> 
+                      <p class='white'>Add an Artisan</p>
+                      <p class='white'>Artisan Name: </p> <input type='text' name='artisanname' id='artisanname'/>
+                      <p class='white'>Artisan E-mail: </p> <input type='text' name='artisanemail' id='artisanemail'/> <br>
+                      <p class='white'>Artisan Password: </p> <input type='text' name='artisanpw' id='artisanpw'/> <br>
+                      <p class='white'>Artisan Description: </p> <textarea rows='4' name='artisandesc' id='artisandesc'> </textarea><br>
+                      <span class='white'>Modify vendor image:</span> <input class='white' id='new-photo' type='file' name='newphoto'/> <br>
+                      <input type='submit' value='Add Artisan' name='addvendorbutton' id='addvendorbutton'>
+                    </form>
+            ");
+            while ($row = $result->fetch_assoc()) {
+              print("
+                      <div class='content-artisans'>
+                        <div class='vendor'>
+                          <div>
+                            <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
+                          </div>
+                          <div class='vendor-info'>
+                            <h1><a class='white' href='./profile.php?vendorID={$row['vendorid']}'>{$row['vendorname']}</a></h1>
+                            <p class='white'>{$row['description']}</p>
+                          </div>
+                        </div>
+                      </div>");
             }
+          } else { // CUSTOMER VIEW
+             $result= $mysqli->query($query);
+              if ($result->num_rows == 0) {
+                print("There are no Artisans available!");
+              } else {
+                  while ($row = $result->fetch_assoc()) {
+                    print("
+                            <div class='content-artisans'>
+                              <div class='vendor'>
+                                <div>
+                                  <img class='vendor-image' src='../images/{$row['filepath']}' alt='artisan-image'/>
+                                </div>
+                                <div class='vendor-info'>
+                                  <h1><a class='white' href='./profile.php?vendorID={$row['vendorid']}'>{$row['vendorname']}</a></h1>
+                                  <p class='white'>{$row['description']}</p>
+                                </div>
+                              </div>
+                            </div>");
+                  }
+              }
 
+            }
+           
           // MORE ADMIN FUNCTIONALITY BELOW
 
-            if (isset($_POST['deletevendorbutton'])) {
-              $vendorid=$_POST['vendorid'];
-              $result=$mysqli->query("SELECT userid from vendors where vendorid=$vendorid");
-              while($row=$result->fetch_assoc()) {
-                $id=$row['userid'];
-                echo($id);
-                $mysqli->query("DELETE from items where vendorid=$vendorid");
-                $mysqli->query("DELETE FROM vendors where vendorid=$vendorid");
-                $mysqli->query("DELETE FROM users where userid=$id");
-              }
-            }
+            // if (isset($_POST['deletevendorbutton'])) {
+            //   $vendorid=$_POST['vendorid'];
+            //   $result=$mysqli->query("SELECT userid from vendors where vendorid=$vendorid");
+            //   while($row=$result->fetch_assoc()) {
+            //     $id=$row['userid'];
+            //     echo($id);
+            //     $mysqli->query("DELETE from items where vendorid=$vendorid");
+            //     $mysqli->query("DELETE FROM vendors where vendorid=$vendorid");
+            //     $mysqli->query("DELETE FROM users where userid=$id");
+            //   }
+            // }
 
             if (isset($_POST['addvendorbutton'])) {
               $hashed_password = password_hash("{$_POST['artisanpw']}", PASSWORD_DEFAULT);
