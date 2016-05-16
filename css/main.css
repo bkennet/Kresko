@@ -737,6 +737,10 @@ ul {
 	border-bottom: 1px solid black;
 }
 
+.item-description-textarea {
+	width:100%;
+}
+
 .content-checkout {
 	display: flex;
 	justify-content: center;

@@ -17,8 +17,9 @@
           $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
           // $ID = isset($_SESSION['logged_usertype'] && $SESSION['logged_usertype'] == 2) ? $_SESSION['logged_userid'] : $_GET['categoryID'];
-          $usertype = (isset($_SESSION) && $_SESSION['logged_usertype']) ? $_SESSION['logged_usertype'] : 1;
-          if (isset($_SESSION['logged_usertype']) && $_SESSION['logged_usertype'] == 2) { // then vendor is logged in
+          $usertype = isset($_SESSION['logged_usertype']) ? $_SESSION['logged_usertype'] : 1;
+
+          if ($usertype == 2) { // then vendor is logged in
             $ID = $_SESSION['logged_userid']; // userID of vendor
             $query = getVendorItems($ID); 
           } else {

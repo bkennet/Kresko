@@ -47,7 +47,7 @@
         print("
                 <form method='post' action='./items.php?itemID=$ID' id='addtocart' enctype='multipart/form-data'>
                   <h1 id='name'>{$row['itemname']}</h1>
-                  <input type='text' value='{$row['price']}' name='price'/>
+                  <span>Price ($): </span><input type='text' value='{$row['price']}' name='price'/>
                   <h2>{$row['vendorname']}</h2>
 
                   <textarea rows='4' name='itemdescription' class='item-description-textarea'>{$row['itemdescription']}</textarea> <br>
@@ -93,14 +93,27 @@
 
     <?php
       if (isset($_POST['edititem'])) { // Edit form was submitted
-        // $price = isset($_POST['price']) ? filter_var($_POST['price'] : null;
-        // $itemDescription = isset($_POST['itemdescription']) ? filter_var($_POST['itemdescription'], FILTER_SANITIZE_STRING) : null;
-        // $itemImage = isset($_POST['newphoto']) ? $_POST['newphoto'] : null;
+        $price = isset($_POST['price']) ? filter_var($_POST['price'], FILTER_SANITIZE_STRING) : null;
+        $itemDescription = isset($_POST['itemdescription']) ? substr(filter_var($_POST['itemdescription'], FILTER_SANITIZE_STRING), 400) : null;
+
 
         // make sure price is numeric or null
-
-      } 
-
+        if ($price == null || is_numeric($price)) { // Then price is in correct form
+          // Handle Photo
+          if (! empty($_FILES['newphoto'])) {
+            $newfile=$_FILES['newphoto'];
+            $tempName=$newfile['tmp_name'];
+            $name=$newfile['name'];
+            $location='../images/'.$name;
+            move_uploaded_file($tempName, $location);
+            $query = "UPDATE `items` SET description=$itemdescription, filepath=$name, price=$price WHERE items.itemid = '$ID'";
+          } else {
+            $query = "UPDATE `items` SET description=$itemdescription, filepath=null, price=$price WHERE items.itemid = '$ID'";
+          }
+          $mysqli->query($query);
+          print("<p>Success! Item has updated</p>");
+        }
+      }
     ?>
 
 
