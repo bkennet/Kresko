@@ -20,8 +20,8 @@
 							<p class='white'>To complete your order please provide your email and address below. We will contact you to confirm your purchase with payment instructions.</p>
 							
 							<form class='checkout-email' action='./checkout.php' method='post'>
-								<p class='white'>Email: <input type='text' name='email' placeholder='you@gmail.com'/></p>
-								<p class='white'>Address: <input type='text' name='address' placeholder='123 Landlover Lane, Dover, MA 10042'/></p>
+								<p class='white'>Email:</p> <input class='checkout-input' type='text' name='email' placeholder='you@gmail.com'/>
+								<p class='white'>Address:</p> <input class='checkout-input' type='text' name='address' placeholder='123 Landlover Lane, Dover, MA 10042'/> <br/>
 								<input class='checkout-submit' name='submit' type='submit' value='Submit' /> 
 							</form>
 						");

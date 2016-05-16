@@ -580,6 +580,10 @@ input:-webkit-autofill {
 	width: 30%;
 }
 
+.note {
+	opacity: .8;
+}
+
 ul {
 	list-style-type: none;
 	text-align: center;
@@ -686,9 +690,13 @@ ul {
 	flex-direction: column;
 }
 
+.checkout-input {
+	width: 20%;
+}
+
 .checkout-submit {
 	margin-bottom: 30px;
-	width: 50%;
+	width: 20%;
 }
 
 .green {

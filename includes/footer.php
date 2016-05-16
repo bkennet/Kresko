@@ -23,3 +23,4 @@
 	</div>
 			
 	<p id="copyright">&copy; www.kresko.com 2016</p>
+	<p class="note">NOTE: All simulated item credits (image, name, and price) go to our client.</p>

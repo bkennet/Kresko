@@ -4,6 +4,7 @@
   <head>
     <?php include "../includes/header.php"; ?>
     <?php include "../functions/queries.php"; ?>
+    <?php echo "<pre>" . var_dump($_SESSION) . "</pre>"; ?>
   </head>
   <body>
     <div class="container-fluid page-wrapper">
@@ -43,25 +44,22 @@
 	-->
     <div class="itemdesc">
     <?php
-      if (isset($_SESSION) && $_SESSION['usertype'] == 2) { // Then you are a vendor on items.php
+      if (isset($_SESSION) && $_SESSION['logged_usertype'] == 2) { // Then you are a vendor on items.php
         print("
                 <form method='post' action='./items.php?itemID=$ID' id='addtocart' enctype='multipart/form-data'>
                   <h1 id='name'>{$row['itemname']}</h1>
-                  <input type='text' value='\${$row['price']}' name='price'/>
+                  <input type='text' value='{$row['price']}' name='price'/>
                   <h2>{$row['vendorname']}</h2>
 
-                  <textarea rows='4' name='itemdescription' class='item-description-textarea'>{$row['itemdescription']}</textarea>
-                  <span class='white'>Modify vendor image:</span> <input class='white' type='file' name='newphoto'>
+                  <textarea rows='4' name='itemdescription' class='item-description-textarea'>{$row['itemdescription']}</textarea> <br>
+                  Modify item image: <input class='white' type='file' name='newphoto'>
 
-                  <input type='hidden' name='itemID' value=$ID />
-                  <input type='submit' class='button' value='Edit Item' />
+                  <input name='edititem' type='submit' class='button' value='Edit Item' />
                 </form>
           ");
       }
       else { // Then you are a customer on items.php
         
-        
-
         print(" 
                 <form method='post' action='./bag.php' id='addtocart'>
                   <h1 id='name'>{$row['itemname']}</h1>
@@ -93,48 +91,20 @@
         ");
       }
     ?>
-    <!-- <form method="post" action="./bag.php" id="addtocart"> -->
-      <?php
-      // print("<h1 id='name'>{$row['itemname']}</h1>
-      //       <h1 id='price'>$ {$row['price']}</h1>
-      //       <h2>{$row['vendorname']}</h2>");
 
-      ?>
-	 <!-- Editable if user is logged in as vendor associated with this item 
-	 (display editable field instead of h1 tag))
-	 -->
+    <?php
+      if (isset($_POST['edititem'])) { // Edit form was submitted
+        // $price = isset($_POST['price']) ? filter_var($_POST['price'] : null;
+        // $itemDescription = isset($_POST['itemdescription']) ? filter_var($_POST['itemdescription'], FILTER_SANITIZE_STRING) : null;
+        // $itemImage = isset($_POST['newphoto']) ? $_POST['newphoto'] : null;
 
-      <!-- <h2>quantity:
-        <select name="quantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </h2> -->
-		<!-- Editable if user is logged in user associated with this item (display editable textarea instead of h3 tag)-->
-		
-      <?php
-        // print("<h3>{$row['itemdescription']}</h3>");
-      ?>
+        // make sure price is numeric or null
+        
+      } 
 
-	  <!-- Plan for cart is currently to add to paypal cart, to be implemented later -->
-        <!-- <input type="hidden" name='itemID' value=<?php //echo $ID;?> />
-        <input type='submit' class='button' value="Add to Cart" />
-      </form> -->
+    ?>
 
-      <?php
-        // if (isset($_POST['item-deleted'])) {
-        //   $mysqli->query("DELETE FROM `items` WHERE items.itemid = $ID;");
-        //   print ("<p>This item was deleted succesfully. Please navigate back to categories to your items to view your change.</p>");
-        // } 
-      ?>
+
 
 
 
